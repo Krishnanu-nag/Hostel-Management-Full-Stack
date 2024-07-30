@@ -1,0 +1,73 @@
+#aquamarineRoomLayout{
+    text-align: center;
+    margin:0 30px;
+
+   
+}
+#aquamarineRoomSelect{
+    text-align: center;
+    max-width: 330px ;  
+    background-color: rgb(58, 57, 56);
+    padding: 20px;
+    margin: auto;
+    height: 10em;
+
+}
+
+
+
+/* 
+.custom-checkbox .checkmark {
+    padding:3px;
+    display: inline-block;
+    width: 15%;
+    height: 39%;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 20px;
+    font-size: 14px;
+    
+}
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+    background-color: #4caf50;
+    color: white;
+    justify-content: center;
+}
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+ */
+
+
+
+ /* instead of changing shape of radio button add a div/span adjacent to it and hide the radios by default and show only the div/span as label and change color of div when checked this will look as if we checking the checkbox actually we are selecting the label and the label gets color filled when clicked and not the radio buttons */
+
+.custom-radio input[type="radio"] {
+    display: none;
+}
+
+/* Create a custom checkmark */
+.custom-radio .checkmark {
+    margin: 0 5px ;    
+    display: inline-block;
+    width: 15%;
+    height: 43%;
+    border: 1px solid #ffffff;
+    position: relative;
+    vertical-align: middle;
+    color: rgb(255, 255, 255);
+}
+
+/* When the radio button is checked, change the content */
+.custom-radio input[type="radio"]:checked + .checkmark {
+    background-color: #4caf50;                               
+    
+}
+
+.checkmark:hover{
+    cursor: pointer;
+    background-color: #4caf50;
+}
+
