@@ -78,6 +78,15 @@ button:hover{
   padding: 25px;
 }
 
+.showpassword:hover{
+  cursor: pointer;
+  color:#b1040dbe;
+}
+.showpassword{
+  position: relative;
+  left:55px;
+  bottom:33px;
+}
 
 /* Login Page css ends */
 

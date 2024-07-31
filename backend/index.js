@@ -3,6 +3,7 @@ const express=require("express")
 const mongoose=require("mongoose") 
 const cors=require("cors") 
 const credentialModel=require("./models/Credential")
+const AllocatedRoomModel = require("./models/AllotedRoom")
 const app=express()
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
@@ -55,12 +56,30 @@ app.post("/login-page",async (req,res)=>{
         else{
             res.json("Invalid")
         }
+
     })
 
 
 
 })
 
+app.post("/aquamarine-room-page",async (req,res)=>{
+    const {selectedBlock,selectedFloor,selectedRoom}=req.body
+     .then(user=>{
+        if(user){
+            const data={
+                selectedBlock:selectedBlock,
+                selectedFloor:selectedFloor,    
+                selectedRoom:selectedRoom,   
+            }
+            AllocatedRoomModel.insertMany([data])
+            res.json("AllocationSuccess")    }
+        else{
+            res.json("AllocationFailed")
+        }
+     })
+
+})
 
 app.listen(3000,()=>{
     console.log(`connected to port 3000`)

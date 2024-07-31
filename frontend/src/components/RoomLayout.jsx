@@ -2,8 +2,9 @@ import "./RoomLayout.css";
 import { useState } from "react";
 
 
+
 function RoomLayout() {
-  const [selectedRoom,setSelectedRoom]=useState()
+  let [selectedRoom,setSelectedRoom]=useState()
   // console.log(selectedRoom)
   return (
     <>
@@ -65,7 +66,9 @@ function RoomLayout() {
           
         </div>
       </div>
+
     </>
   );
 }
 export default RoomLayout;
+

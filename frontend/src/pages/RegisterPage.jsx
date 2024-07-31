@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-function LoginPage() {
+function RegisterPage() {
   const [isRegistered,setIsRegistered]=useState(false)
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
@@ -26,6 +26,16 @@ function LoginPage() {
       alert("Please enter credentials");
     }
   }
+  // function hide(){
+  //   document.querySelector(".password").type="password"
+  //   document.querySelector(".showpassword").innerHTML="Show"  
+  //   show()
+  // }
+  // function show(){
+  //   document.querySelector(".password").type="text"
+  //   document.querySelector(".showpassword").innerHTML="Hide"   
+  //   hide()
+  // }
 
   return (
     <>
@@ -41,11 +51,13 @@ function LoginPage() {
           <br />
           <br />
           <input
+            className="password"
             type="password"
             placeholder="Enter Password"
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
+          {/* <span className="showpassword" onClick={show}>Show</span> */}
           <br />
         </form>
           <button type="submit" onClick={submit}>
@@ -56,4 +68,4 @@ function LoginPage() {
     </>
   );
 }
-export default LoginPage;
+export default RegisterPage;
