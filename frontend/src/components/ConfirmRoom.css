@@ -1,0 +1,13 @@
+.confirmRoom{
+    display: flex;
+    justify-content: center;
+}
+.container{
+    background-color: aliceblue;
+    color: black;
+    width:50px;
+    height: 50px;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+}

@@ -21,6 +21,7 @@ function LoginPage(){
             }
             else if (result.data === "Failed") {
               alert("Invalid Password")  
+              window.location.reload(false)  //refreshes page for invalid credentials
             }
             else if (result.data === "Invalid") {
               alert("User not registered. Please Register !!!")  
