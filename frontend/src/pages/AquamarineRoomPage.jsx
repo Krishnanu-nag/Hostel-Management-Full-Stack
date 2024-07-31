@@ -51,7 +51,7 @@ function AquamarineRoomPage() {
           </form>
           </div>
            {ischeckRoom && <RoomLayout/>} <br/><br/>
-           {ischeckRoom && <ConfirmRoom block={selectedBlock} floor={selectedFloor} room={selectedRoom}/>} 
+           {ischeckRoom && <ConfirmRoom block={selectedBlock} floor={selectedFloor} />} 
           
            
         </div>
