@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./ConfirmRoom.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -9,6 +11,7 @@ import axios from "axios";
 
 
 function ConfirmRoom(data) {
+  const navigate=useNavigate();
 
   
     let confirmSubmit = async (e) => {
@@ -20,7 +23,7 @@ function ConfirmRoom(data) {
           selectedRoom,
         })
         .then((result) => {
-          if (result.data === "AllocationSuccess"){alert(`Success your alloted room is ${data.block}/${data.floor}/${data.room}`)}
+          if (result.data === "AllocationSuccess"){alert(`Success your alloted room is ${data.block}/${data.floor}/${data.room}`),navigate("/room-booked-page")}
            else {
             alert("Allocation Failed");
           }

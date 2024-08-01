@@ -11,6 +11,8 @@ import HomePage from './pages/HomePage.jsx';
 import AquamarinePage from './pages/AquamarinePage.jsx';
 import AquamarineRoomPage from './pages/AquamarineRoomPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
+import RoomBooked from './components/RoomBooked.jsx';
+import ErrorPage from './pages/ErrorPage.jsx';
 
 
 
@@ -38,6 +40,14 @@ const router=createBrowserRouter([    //array of objects
   {
     path:"/aquamarine-room-page",
     element:<AquamarineRoomPage/>
+  },
+  {
+    path:"/room-booked-page",
+    element:<RoomBooked/>
+  },
+  {
+    path:"*",
+    element:<ErrorPage/>
   },
 
   
