@@ -11,7 +11,7 @@ const AllotedRoomSchema=new mongoose.Schema({
     }, 
     selectedRoom:{
         type:String, 
-        required:true
+        required:true,
     },                      ///string x it should be String capital S
 })
 

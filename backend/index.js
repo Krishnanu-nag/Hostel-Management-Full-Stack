@@ -65,21 +65,15 @@ app.post("/login-page",async (req,res)=>{
 
 app.post("/aquamarine-room-page",async (req,res)=>{
     const {selectedBlock,selectedFloor,selectedRoom}=req.body
-     .then(user=>{
-        if(user){
-            const data={
+    const data={
                 selectedBlock:selectedBlock,
                 selectedFloor:selectedFloor,    
                 selectedRoom:selectedRoom,   
             }
             AllocatedRoomModel.insertMany([data])
             res.json("AllocationSuccess")    }
-        else{
-            res.json("AllocationFailed")
-        }
-     })
-
-})
+    
+     )
 
 app.listen(3000,()=>{
     console.log(`connected to port 3000`)

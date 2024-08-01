@@ -2,7 +2,14 @@ import { useState } from "react";
 import "./ConfirmRoom.css";
 import axios from "axios";
 
+
+
+
+
+
+
 function ConfirmRoom(data) {
+
   
     let confirmSubmit = async (e) => {
       e.preventDefault();
@@ -13,11 +20,8 @@ function ConfirmRoom(data) {
           selectedRoom,
         })
         .then((result) => {
-          if (result.data === "AllocationSuccess") {
-            alert(
-              `Success your alloted room is ${data.block}/${data.floor}/${data.room}`
-            );
-          } else {
+          if (result.data === "AllocationSuccess"){alert(`Success your alloted room is ${data.block}/${data.floor}/${data.room}`)}
+           else {
             alert("Allocation Failed");
           }
         })
@@ -57,6 +61,7 @@ function ConfirmRoom(data) {
           <br />
           <br />
           {isAgreed === true && <button onClick={confirmSubmit}>Submit</button>}
+          
           <br />
           <br />
         </div>
