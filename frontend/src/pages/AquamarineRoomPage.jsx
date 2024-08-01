@@ -3,6 +3,9 @@ import MainLayout from "../layout/MainLayout";
 import { useState, } from "react";
 import ConfirmRoom from "../components/ConfirmRoom";
 import "../components/RoomLayout.css";
+import Timer from "../components/Timer.jsx"
+
+
 function AquamarineRoomPage() {
   let [ischeckRoom, setcheckRoom] = useState(false);
   let [selectedBlock, setSelectedBlock] = useState("");
@@ -13,6 +16,7 @@ function AquamarineRoomPage() {
   return (
     <>
       <MainLayout>
+      
         <div id="aquamarineRoomPage">
           <div className="form-container">
             <form action="">
@@ -71,6 +75,8 @@ function AquamarineRoomPage() {
                   if (selectedBlock != "" && selectedFloor != "") {
                     setRoomLayout(true);
                     setcheckRoom(true);
+                   
+                    
                   } else {
                     alert("Please Select Block / Floor !! ");
                   }
@@ -81,7 +87,7 @@ function AquamarineRoomPage() {
               </button>
             </form>
           </div>
-
+          {roomLayout===true && <Timer/>}<br/>
           {roomLayout===true && (<div id="aquamarineRoomLayout">
             <div
               id="aquamarineRoomSelect"

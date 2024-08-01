@@ -26,17 +26,11 @@ function RegisterPage() {
       alert("Please enter credentials");
     }
   }
-  // function hide(){
-  //   document.querySelector(".password").type="password"
-  //   document.querySelector(".showpassword").innerHTML="Show"  
-  //   show()
-  // }
-  // function show(){
-  //   document.querySelector(".password").type="text"
-  //   document.querySelector(".showpassword").innerHTML="Hide"   
-  //   hide()
-  // }
+  const [showPassword, setShowPassword] = useState(false);
 
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <>
       <div className="centerdiv" id="loginPage">
@@ -52,17 +46,22 @@ function RegisterPage() {
           <br />
           <input
             className="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Enter Password"
             onChange={(e) => setPassword(e.target.value)}
-          />
+          /><br/>
+          <a className="passwordVisbility" type="button" onClick={togglePassword}>
+            {showPassword ? "Hide" : "Show"}
+          </a>
           <br />
           {/* <span className="showpassword" onClick={show}>Show</span> */}
           <br />
         </form>
-          <button type="submit" onClick={submit}>
-            Register
-          </button><br/><br/>
+        <button type="submit" onClick={submit}>
+          Register
+        </button>
+        <br />
+        <br />
         <Link to="/login-page">Already registered?</Link>
       </div>
     </>

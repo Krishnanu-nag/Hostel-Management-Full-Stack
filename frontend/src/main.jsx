@@ -16,6 +16,7 @@ import ErrorPage from './pages/ErrorPage.jsx';
 
 
 
+
 const router=createBrowserRouter([    //array of objects
   {
     path:"/",
@@ -49,6 +50,7 @@ const router=createBrowserRouter([    //array of objects
     path:"*",
     element:<ErrorPage/>
   },
+ 
 
   
 

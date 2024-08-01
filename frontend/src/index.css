@@ -87,7 +87,15 @@ button:hover{
   left:55px;
   bottom:33px;
 }
-
+#loginPage a:hover{
+  cursor: pointer;
+  color:  #b1040dbe;
+}
+.passwordVisbility{
+  position: relative;
+  left: 60px;
+  bottom: 32px;
+}
 /* Login Page css ends */
 
 
