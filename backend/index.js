@@ -64,16 +64,31 @@ app.post("/login-page",async (req,res)=>{
 })
 
 app.post("/aquamarine-room-page",async (req,res)=>{
-    const {selectedBlock,selectedFloor,selectedRoom}=req.body
-    const data={
+    const {selectedBlock,selectedFloor,selectedRoom,studentId}=req.body
+    AllocatedRoomModel.findOne({studentId:studentId})
+    .then(user=>{
+        if(!user){
+            const data={
                 selectedBlock:selectedBlock,
                 selectedFloor:selectedFloor,    
-                selectedRoom:selectedRoom,   
+                selectedRoom:selectedRoom,  
+                studentId:studentId, 
             }
             AllocatedRoomModel.insertMany([data])
-            res.json("AllocationSuccess")    }
-    
-     )
+            res.json("AllocationSuccess")  
+        }
+        else  res.json("AllocationFailed")
+
+    })
+     })
+app.post("/aquamarine-room-page-check-alloted?",async (req,res)=>{
+    const {studentId}=req.body
+    AllocatedRoomModel.findOne({studentId:studentId})
+    .then(user=>{
+        if(user) res.json("AlreadyAlloted")
+        else res.json("NotYetAlloted")
+    })
+     })
 
 app.listen(3000,()=>{
     console.log(`connected to port 3000`)

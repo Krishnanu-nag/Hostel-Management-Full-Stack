@@ -21,18 +21,27 @@ function ConfirmRoom(data) {
           selectedBlock,
           selectedFloor,
           selectedRoom,
+          studentId,
         })
         .then((result) => {
-          if (result.data === "AllocationSuccess"){alert(`Success your alloted room is ${data.block}/${data.floor}/${data.room}`),navigate("/room-booked-page")}
-           else {
-            alert("Allocation Failed");
-          }
+          if (result.data === "AllocationSuccess"){alert(`Success your alloted room is ${data.block}/${data.floor}/${data.room}`);
+          navigate("/room-booked-page");
+          localStorage.setItem("selectedBlock",selectedBlock)
+          localStorage.setItem("selectedFloor",selectedFloor)
+          localStorage.setItem("selectedRoom",selectedRoom)
+        
+        }
+          //  else {
+          //   alert("User Exsits and already Room Alloted");
+          //   navigate("/home-page")
+          // }
         })
         .catch((err) => {console.log("Newtwork issue"),console.log(err.response.data)});
     };
   const selectedBlock=data.block
   const selectedFloor=data.floor
   const selectedRoom=data.room
+  const studentId=localStorage.getItem("studentId")
   const [isAgreed, setIsAgreed] = useState(false);
   return (
     <>
@@ -60,7 +69,7 @@ function ConfirmRoom(data) {
             }}
           />{" "}
           I agree that All choices made above are done by me and after I submit
-          no changes can be made furthur.
+          no changes can be made further.
           <br />
           <br />
           {isAgreed === true && <button onClick={confirmSubmit}>Submit</button>}

@@ -1,21 +1,27 @@
 import "./Navbar.css";
-import { Link,NavLink } from "react-router-dom";
+import { Link,NavLink,useNavigate } from "react-router-dom";
 function Navbar() {
+  const navigate=useNavigate()
+  function logOut(){
+    localStorage.removeItem("studentId")
+    localStorage.removeItem("password")
+    navigate("/login-page")
+  }
   return (
     <>
       <header>
         <div className="logobar">
           <Link to="/home-page">
-            <img className= "logo" src="./logo.png" />
+            <img className="logo" src="./logo.png" />
           </Link>
-          
         </div>
         <div className="navbar">
           <NavLink to="/home-page">
-          <span className="dropdown">
-            <button id="home-btn"className="dropbtn">
-              Home ⮟
-            </button></span>
+            <span className="dropdown">
+              <button id="home-btn" className="dropbtn">
+                Home◽
+              </button>
+            </span>
           </NavLink>
           <span className="dropdown">
             <button className="dropbtn">Boys Hostel ⮟</button>
@@ -44,6 +50,11 @@ function Navbar() {
                 Old Rosaline
               </Link>
             </div>
+          </span>
+          <span id="logOut" className="dropdown">
+            <button onClick={logOut} id="home-btn" className="dropbtn">
+              Log-out◽
+            </button>
           </span>
         </div>
       </header>

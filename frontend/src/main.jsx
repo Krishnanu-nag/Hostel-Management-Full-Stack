@@ -13,6 +13,7 @@ import AquamarineRoomPage from './pages/AquamarineRoomPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import RoomBooked from './components/RoomBooked.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
+import ThanksPage from './pages/ThanksPage.jsx';
 
 
 
@@ -45,6 +46,10 @@ const router=createBrowserRouter([    //array of objects
   {
     path:"/room-booked-page",
     element:<RoomBooked/>
+  },
+  {
+    path:"/thanks-page",
+    element:<ThanksPage/>
   },
   {
     path:"*",

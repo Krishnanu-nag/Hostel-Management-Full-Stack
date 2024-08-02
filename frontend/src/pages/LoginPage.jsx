@@ -4,10 +4,25 @@ import axios from "axios";
 function LoginPage() {
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
+  const [newLogin, setNewLogin] = useState(false);   //removes old login info saved on local storage if previously not removed by logging out 
   const navigate = useNavigate();
+  if (!newLogin){
+    localStorage.removeItem("studentId");
+    localStorage.removeItem("password");
+    localStorage.removeItem("selectedBlock");
+    localStorage.removeItem("selectedFloor");
+    localStorage.removeItem("selectedRoom");
+  }
+  
+
   let submit = async (e) => {
     if (studentId != "" && password != "") {
       e.preventDefault();
+      setNewLogin(true);  //old account details gets delected and new gets stored
+      localStorage.setItem('studentId', studentId);
+      localStorage.setItem('password', password);
+      setStudentId(""); // Clear the form fields for better user experience
+      setPassword("");
 
       await axios
         .post("http://localhost:3000/login-page", {
@@ -41,6 +56,7 @@ function LoginPage() {
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
+  
 
   return (
     <>
@@ -68,7 +84,8 @@ function LoginPage() {
         </form>
         <button type="submit" onClick={submit}>
           Login
-        </button>
+        </button><br/><br/>
+        <Link to="/register-page">Not registered?</Link>
       </div>
     </>
   );

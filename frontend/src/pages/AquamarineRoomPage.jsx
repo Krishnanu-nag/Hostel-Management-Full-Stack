@@ -1,22 +1,26 @@
 import "./AquamarineRoomPage.css";
 import MainLayout from "../layout/MainLayout";
-import { useState, } from "react";
+import { useState } from "react";
 import ConfirmRoom from "../components/ConfirmRoom";
 import "../components/RoomLayout.css";
-import Timer from "../components/Timer.jsx"
+import Timer from "../components/Timer.jsx";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+
 
 
 function AquamarineRoomPage() {
+  const navigate=useNavigate();
   let [ischeckRoom, setcheckRoom] = useState(false);
   let [selectedBlock, setSelectedBlock] = useState("");
   let [selectedFloor, setSelectedFloor] = useState("");
   let [selectedRoom, setSelectedRoom] = useState("");
   let [roomLayout, setRoomLayout] = useState(false);
+  let studentId=localStorage.getItem("studentId")
 
   return (
     <>
       <MainLayout>
-      
         <div id="aquamarineRoomPage">
           <div className="form-container">
             <form action="">
@@ -70,111 +74,123 @@ function AquamarineRoomPage() {
               <br />
               <br />
               <button
-                onClick={(e) => {
+                onClick={async (e) => {
                   e.preventDefault();
                   if (selectedBlock != "" && selectedFloor != "") {
-                    setRoomLayout(true);
-                    setcheckRoom(true);
-                   
+                    await axios.post(
+                      "http://localhost:3000/aquamarine-room-page-check-alloted?",
+                      { studentId }
+                    )
+                    .then(result=>{
+                      if(result.data==="AlreadyAlloted") {alert(`${localStorage.getItem("studentId")} has already been Alloted room`);
+                      navigate("/home-page")}
+                      else if(result.data==="NotYetAlloted"){setRoomLayout(true);
+                        setcheckRoom(true);}
+                    })
                     
                   } else {
                     alert("Please Select Block / Floor !! ");
                   }
                 }}
               >
-                {" "}
-                Check Available Rooms{" "}
+                Check Available Rooms
               </button>
             </form>
           </div>
-          {roomLayout===true && <Timer/>}<br/>
-          {roomLayout===true && (<div id="aquamarineRoomLayout">
-            <div
-              id="aquamarineRoomSelect"
-              onChange={(e) => {
-                setSelectedRoom(e.target.value);
-              }}
-            >
-              <label className="custom-radio">
-                <input value="01" type="radio" name="option" />
-                <span className="checkmark">
-                  <p className="centerdiv">1</p>
-                </span>
-              </label>
+          {roomLayout === true && <Timer />}
+          <br />
+          {roomLayout === true && (
+            <div id="aquamarineRoomLayout">
+              <div
+                id="aquamarineRoomSelect"
+                onChange={(e) => {
+                  setSelectedRoom(e.target.value);
+                }}
+              >
+                <label className="custom-radio">
+                  <input value="01" type="radio" name="option" />
+                  <span className="checkmark">
+                    <p className="centerdiv">1</p>
+                  </span>
+                </label>
 
-              <label className="custom-radio">
-                <input
-                  value="02"
-                  selected
-                  type="radio"
-                  name="option"
-                  disabled
-                />
-                <span className="checkmark" style={{ backgroundColor: "#FF0000" }}>
-                  <p className="centerdiv">2</p>
-                </span>
-              </label>
+                <label className="custom-radio">
+                  <input
+                    value="02"
+                    selected
+                    type="radio"
+                    name="option"
+                    disabled
+                  />
+                  <span
+                    className="checkmark"
+                    style={{ backgroundColor: "#FF0000" }}
+                  >
+                    <p className="centerdiv">2</p>
+                  </span>
+                </label>
 
-              <label className="custom-radio">
-                <input value="03" type="radio" name="option" />
-                <span className="checkmark">
-                  <p className="centerdiv">3</p>
-                </span>
-              </label>
+                <label className="custom-radio">
+                  <input value="03" type="radio" name="option" />
+                  <span className="checkmark">
+                    <p className="centerdiv">3</p>
+                  </span>
+                </label>
 
-              <label className="custom-radio">
-                <input value="04" selected type="radio" name="option" />
-                <span className="checkmark">
-                  <p className="centerdiv">4</p>
-                </span>
-              </label>
+                <label className="custom-radio">
+                  <input value="04" selected type="radio" name="option" />
+                  <span className="checkmark">
+                    <p className="centerdiv">4</p>
+                  </span>
+                </label>
 
-              <label className="custom-radio">
-                <input value="05" selected type="radio" name="option" />
-                <span className="checkmark">
-                  <p className="centerdiv">5</p>
-                </span>
-              </label>
+                <label className="custom-radio">
+                  <input value="05" selected type="radio" name="option" />
+                  <span className="checkmark">
+                    <p className="centerdiv">5</p>
+                  </span>
+                </label>
 
-              <br />
-              <br />
+                <br />
+                <br />
 
-              <label className="custom-radio">
-                <input value="10" type="radio" name="option" />
-                <span className="checkmark">
-                  <p className="centerdiv">10</p>
-                </span>
-              </label>
+                <label className="custom-radio">
+                  <input value="10" type="radio" name="option" />
+                  <span className="checkmark">
+                    <p className="centerdiv">10</p>
+                  </span>
+                </label>
 
-              <label className="custom-radio">
-                <input value="09" selected type="radio" name="option" />
-                <span className="checkmark">
-                  <p className="centerdiv">9</p>
-                </span>
-              </label>
+                <label className="custom-radio">
+                  <input value="09" selected type="radio" name="option" />
+                  <span className="checkmark">
+                    <p className="centerdiv">9</p>
+                  </span>
+                </label>
 
-              <label className="custom-radio">
-                <input value="08" type="radio" name="option" />
-                <span className="checkmark">
-                  <p className="centerdiv">8</p>
-                </span>
-              </label>
+                <label className="custom-radio">
+                  <input value="08" type="radio" name="option" />
+                  <span className="checkmark">
+                    <p className="centerdiv">8</p>
+                  </span>
+                </label>
 
-              <label className="custom-radio">
-                <input value="07" selected type="radio" name="option" />
-                <span className="checkmark">
-                  <p className="centerdiv">7</p>
-                </span>
-              </label>
+                <label className="custom-radio">
+                  <input value="07" selected type="radio" name="option" />
+                  <span className="checkmark">
+                    <p className="centerdiv">7</p>
+                  </span>
+                </label>
 
-              <label className="custom-radio">
-                <input value="06" selected type="radio" name="option" />
-                <span className="checkmark">
-                  <p className="centerdiv">6</p>
-                </span>
-              </label>
+                <label className="custom-radio">
+                  <input value="06" selected type="radio" name="option" />
+                  <span className="checkmark">
+                    <p className="centerdiv">6</p>
+                  </span>
+                </label>
+              </div>
             </div>
-          </div>)}
+          )}
           <br />
           <br />
           {ischeckRoom && (
