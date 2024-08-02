@@ -82,7 +82,7 @@ function AquamarineRoomPage() {
                       { studentId }
                     )
                     .then(result=>{
-                      if(result.data==="AlreadyAlloted") {alert(`${localStorage.getItem("studentId")} has already been Alloted room`);
+                      if(result.data==="AlreadyAlloted") {alert(`${localStorage.getItem("studentId")} has already  been Alloted room`);
                       navigate("/home-page")}
                       else if(result.data==="NotYetAlloted"){setRoomLayout(true);
                         setcheckRoom(true);}
