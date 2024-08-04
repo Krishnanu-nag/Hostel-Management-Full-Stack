@@ -3,6 +3,9 @@ import "./AquamarinePage.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// Access the base URL from the environment variables
+const baseURL = import.meta.env.VITE_BASE_URL;
+
 function AquamarinePage() {
   const navigate = useNavigate(); // Move this to the top level of the component
 
@@ -11,7 +14,7 @@ function AquamarinePage() {
 
     try {
       const result = await axios.post(
-        "http://localhost:3000/aquamarine-room-page-check-alloted?",
+        `${baseURL}/aquamarine-room-page-check-alloted?`,
         { studentId }
       );
 
