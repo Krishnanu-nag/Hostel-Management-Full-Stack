@@ -1,8 +1,8 @@
 import "./Navbar.css";
-import { Link,NavLink,useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 function Navbar() {
-  const navigate=useNavigate()
-  function logOut(){
+  const navigate = useNavigate()
+  function logOut() {
     localStorage.removeItem("studentId")
     localStorage.removeItem("password")
     navigate("/login-page")
@@ -51,11 +51,17 @@ function Navbar() {
               </Link>
             </div>
           </span>
-          <span id="logOut" className="dropdown">
-            <button onClick={logOut} id="home-btn" className="dropbtn">
-              Log-out◽
-            </button>
+          <span className="dropdown">
+            <button className="dropbtn">{localStorage.getItem("studentId")} ⮟</button>
+            <div className="dropdown-content">
+             
+                <a onClick={logOut} id="home-btn" className="dropbtn">
+                  Log-out◽
+                </a>
+              
+            </div>
           </span>
+
         </div>
       </header>
     </>

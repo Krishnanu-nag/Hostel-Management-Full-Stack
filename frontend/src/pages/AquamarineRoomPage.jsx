@@ -1,22 +1,81 @@
 import "./AquamarineRoomPage.css";
 import MainLayout from "../layout/MainLayout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ConfirmRoom from "../components/ConfirmRoom";
 import "../components/RoomLayout.css";
 import Timer from "../components/Timer.jsx";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-
-
 function AquamarineRoomPage() {
-  const navigate=useNavigate();
-  let [ischeckRoom, setcheckRoom] = useState(false);
-  let [selectedBlock, setSelectedBlock] = useState("");
-  let [selectedFloor, setSelectedFloor] = useState("");
-  let [selectedRoom, setSelectedRoom] = useState("");
-  let [roomLayout, setRoomLayout] = useState(false);
-  let studentId=localStorage.getItem("studentId")
+  const navigate = useNavigate();
+  const [ischeckRoom, setcheckRoom] = useState(false);
+  const [selectedBlock, setSelectedBlock] = useState("");
+  const [selectedFloor, setSelectedFloor] = useState("");
+  const [isAlloted, setIsAlloted] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState("");
+  const [roomLayout, setRoomLayout] = useState(false);
+  const [occupiedRooms, setOccupiedRooms] = useState([]);
+  const studentId = localStorage.getItem("studentId");
+
+  if (isAlloted == false) {
+    const fetchOccupiedRooms = async () => {
+      try {
+        // Make a POST request to the backend with selectedFloor and selectedBlock
+        const response = await axios.post('http://localhost:3000/occupied-rooms', {
+          selectedFloor: selectedFloor,
+          selectedBlock: selectedBlock
+        });
+
+        // Set the state with the received array of occupied rooms
+        setOccupiedRooms(response.data);
+        setRoomLayout(true);
+        setcheckRoom(true);
+
+      } catch (error) {
+        // Log any error that occurs during the request
+        console.error('Error fetching occupied rooms:', error);
+      }
+    };
+
+    // Fetch occupied rooms when selectedBlock or selectedFloor changes
+    useEffect(() => {
+      if (selectedBlock && selectedFloor) {
+        fetchOccupiedRooms();
+      }
+    }, [selectedBlock, selectedFloor]);
+
+    // Update DOM based on occupiedRooms
+    useEffect(() => {
+      // Reset previous room styles and states
+
+      document.querySelectorAll('.checkmark').forEach(span => {
+        span.style.backgroundColor = ""; // Clear previous background color
+        const inputElement = span.previousElementSibling;
+        if (inputElement) {
+          inputElement.disabled = false; // Enable input
+        }
+      });
+
+      // Apply new styles for occupied rooms
+      occupiedRooms.forEach(roomNumber => {
+        let occupied;
+        if (roomNumber !== "10") {
+          occupied = document.getElementById(`${roomNumber}`);
+        } else {
+          occupied = document.getElementById(`10`);
+        }
+
+        if (occupied) {
+          occupied.style.backgroundColor = "red";
+          const inputElement = occupied.previousElementSibling;
+          if (inputElement) {
+            inputElement.disabled = true; // Disable input
+          }
+        }
+      });
+    }, [occupiedRooms]);
+  }
 
   return (
     <>
@@ -28,34 +87,25 @@ function AquamarineRoomPage() {
               <select
                 name="block"
                 id="block"
-                onChange={(e) => {
-                  setSelectedBlock(e.target.value);
-                }}
+                onChange={(e) => {setSelectedBlock(e.target.value),setSelectedRoom("")}}
               >
-                <option value="" hidden>
-                  Select
-                </option>
-                <option value="A">A</option>
+                <option value="" hidden>Select</option>
                 <option value="B">B</option>
                 <option value="C">C</option>
-                <option value="D">D</option>
+                <option value="P">P</option>
+                <option value="N">N</option>
                 <option value="E">E</option>
                 <option value="G">G</option>
                 <option value="J">J</option>
               </select>
-              <br />
-              <br />
+              <br /><br />
               <label htmlFor="floor">Choose Floor : </label>
               <select
-                name="block"
-                id="block"
-                onChange={(e) => {
-                  setSelectedFloor(e.target.value);
-                }}
+                name="floor"
+                id="floor"
+                onChange={(e) => {setSelectedFloor(e.target.value),setSelectedRoom("")}}
               >
-                <option value="" hidden>
-                  Select
-                </option>
+                <option value="" hidden>Select</option>
                 <option value="G">G</option>
                 <option value="01">1</option>
                 <option value="02">2</option>
@@ -71,128 +121,40 @@ function AquamarineRoomPage() {
                 <option value="12">12</option>
                 <option value="13">13</option>
               </select>
-              <br />
-              <br />
-              <button
+              <br /><br />
+              {/* <button
                 onClick={async (e) => {
-                  e.preventDefault();
-                  if (selectedBlock != "" && selectedFloor != "") {
-                    await axios.post(
-                      "http://localhost:3000/aquamarine-room-page-check-alloted?",
-                      { studentId }
-                    )
-                    .then(result=>{
-                      if(result.data==="AlreadyAlloted") {alert(`${localStorage.getItem("studentId")} has already  been Alloted room`);
-                      navigate("/home-page")}
-                      else if(result.data==="NotYetAlloted"){setRoomLayout(true);
-                        setcheckRoom(true);}
-                    })
-                    
-                  } else {
+                  e.preventDefault();          
+                  if(selectedBlock==""||selectedFloor=="") {
                     alert("Please Select Block / Floor !! ");
                   }
                 }}
               >
                 Check Available Rooms
-              </button>
+              </button> */}
             </form>
           </div>
-          {roomLayout === true && <Timer />}
+          {roomLayout && <Timer />}
           <br />
-          {roomLayout === true && (
+          {roomLayout && (
             <div id="aquamarineRoomLayout">
               <div
                 id="aquamarineRoomSelect"
-                onChange={(e) => {
-                  setSelectedRoom(e.target.value);
-                }}
+                onChange={(e) => {setSelectedRoom(e.target.value)}}
               >
-                <label className="custom-radio">
-                  <input value="01" type="radio" name="option" />
-                  <span className="checkmark">
-                    <p className="centerdiv">1</p>
-                  </span>
-                </label>
-
-                <label className="custom-radio">
-                  <input
-                    value="02"
-                    selected
-                    type="radio"
-                    name="option"
-                    disabled
-                  />
-                  <span
-                    className="checkmark"
-                    style={{ backgroundColor: "#FF0000" }}
-                  >
-                    <p className="centerdiv">2</p>
-                  </span>
-                </label>
-
-                <label className="custom-radio">
-                  <input value="03" type="radio" name="option" />
-                  <span className="checkmark">
-                    <p className="centerdiv">3</p>
-                  </span>
-                </label>
-
-                <label className="custom-radio">
-                  <input value="04" selected type="radio" name="option" />
-                  <span className="checkmark">
-                    <p className="centerdiv">4</p>
-                  </span>
-                </label>
-
-                <label className="custom-radio">
-                  <input value="05" selected type="radio" name="option" />
-                  <span className="checkmark">
-                    <p className="centerdiv">5</p>
-                  </span>
-                </label>
-
-                <br />
-                <br />
-
-                <label className="custom-radio">
-                  <input value="10" type="radio" name="option" />
-                  <span className="checkmark">
-                    <p className="centerdiv">10</p>
-                  </span>
-                </label>
-
-                <label className="custom-radio">
-                  <input value="09" selected type="radio" name="option" />
-                  <span className="checkmark">
-                    <p className="centerdiv">9</p>
-                  </span>
-                </label>
-
-                <label className="custom-radio">
-                  <input value="08" type="radio" name="option" />
-                  <span className="checkmark">
-                    <p className="centerdiv">8</p>
-                  </span>
-                </label>
-
-                <label className="custom-radio">
-                  <input value="07" selected type="radio" name="option" />
-                  <span className="checkmark">
-                    <p className="centerdiv">7</p>
-                  </span>
-                </label>
-
-                <label className="custom-radio">
-                  <input value="06" selected type="radio" name="option" />
-                  <span className="checkmark">
-                    <p className="centerdiv">6</p>
-                  </span>
-                </label>
+                {/* Define your room layout here with radio buttons */}
+                {["01", "02", "03", "04", "05", "10", "09", "08", "07", "6"].map(room => (
+                  <label key={room} className="custom-radio">
+                    <input value={room} type="radio" name="option" />
+                    <span id={room} className="checkmark">
+                      <p className="centerdiv">{room}</p>
+                    </span>
+                  </label>
+                ))}
               </div>
             </div>
           )}
-          <br />
-          <br />
+          <br /><br />
           {ischeckRoom && (
             <ConfirmRoom
               block={selectedBlock}
@@ -205,4 +167,5 @@ function AquamarineRoomPage() {
     </>
   );
 }
+
 export default AquamarineRoomPage;
