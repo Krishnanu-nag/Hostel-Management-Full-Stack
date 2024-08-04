@@ -1,13 +1,13 @@
 import "./PopUp.css";
-import { useState ,useEffect } from "react";
+import { useState, useEffect } from "react";
 function PopUp() {
   let [closed, setclosed] = useState(false);
   return (
     <>
-      {closed ==false? (
-        
-          <span className="popup-bg">
-            <div className="centerdiv">
+      {closed == false ? (
+
+        <span className="popup-bg">
+          <div className="centerdiv">
             <h2>Important !!</h2>
             <br />
             <p>
@@ -20,10 +20,10 @@ function PopUp() {
             <div className="popup-ok-btn">
               <button onClick={() => setclosed(true)}>Ok</button>
             </div>
-            </div>
-          </span>
-        
-      ):<></>}
+          </div>
+        </span>
+
+      ) : <></>}
     </>
   );
 }
