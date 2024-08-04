@@ -61,6 +61,7 @@ function Navbar() {
           </span>
 
         </div>
+        <div className="copyright"><p> Developed by Krishnanu Nag  &nbsp;&nbsp;  22JE0500 &nbsp;&nbsp;  Copyright © 2024  </p></div>
       </header>
     </>
   );
