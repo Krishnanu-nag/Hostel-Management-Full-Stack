@@ -81,6 +81,11 @@ function AquamarineRoomPage() {
     <>
       <MainLayout>
         <div id="aquamarineRoomPage">
+          <div id="legend">
+            <div id="vacant" className="box"></div><label>Vacant</label><br/>
+            <div id="occupied" className="box"></div><label>Occupied</label><br/>
+            <div id="selected" className="box"></div><label>Selected</label><br/>
+          </div>
           <div className="form-container">
             <form action="">
               <label htmlFor="block">Choose Block : </label>
