@@ -36,7 +36,7 @@ function ConfirmRoom(data) {
         console.log("Network issue");
         console.log(err.response.data);
       });}
-      else {alert(`Success !! ${localStorage.getItem("studentId")} your allotted room is ${data.block}/${data.floor}/${data.room} . Since you are a Guest Data is not registered in database !! `);navigate("/thanks-page")}
+      else {alert(`Success !! ${localStorage.getItem("studentId")} your allotted room is ${data.block}/${data.floor}/${data.room} . Since you are a Guest , allocation data will not be registered in database !! `);navigate("/thanks-page")}
   };
 
   const selectedBlock = data.block;
