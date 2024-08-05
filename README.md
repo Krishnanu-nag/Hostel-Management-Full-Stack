@@ -40,7 +40,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Portfolio:** [Krishnanu Nag](https://krishnanu-nag.github.io/Portfolio_final/index.html)
 - **Instagram:** [krishnanu_nag](https://www.instagram.com/krishnanu_nag/)
 - **LinkedIn:** [Krishnanu Nag](https://www.linkedin.com/in/krishnanu-nag/)
-- **Email:** krishnanu@example.com
 
 ---
 
