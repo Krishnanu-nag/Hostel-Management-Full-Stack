@@ -3,46 +3,46 @@ import "./ConfirmRoom.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-
-
-
-
-
+// Access the base URL from the environment variables
+const baseURL = import.meta.env.VITE_BASE_URL;
 
 function ConfirmRoom(data) {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-  
-    let confirmSubmit = async (e) => {
-      e.preventDefault();
-      await axios
-        .post("http://localhost:3000/aquamarine-room-page", {
-          selectedBlock,
-          selectedFloor,
-          selectedRoom,
-          studentId,
-        })
-        .then((result) => {
-          if (result.data === "AllocationSuccess"){alert(`Success your alloted room is ${data.block}/${data.floor}/${data.room}`);
+  let confirmSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .post(`${baseURL}/aquamarine-room-page`, {
+        selectedBlock,
+        selectedFloor,
+        selectedRoom,
+        studentId,
+      })
+      .then((result) => {
+        if (result.data === "AllocationSuccess") {
+          alert(`Success your allotted room is ${data.block}/${data.floor}/${data.room}`);
           navigate("/room-booked-page");
-          localStorage.setItem("selectedBlock",selectedBlock)
-          localStorage.setItem("selectedFloor",selectedFloor)
-          localStorage.setItem("selectedRoom",selectedRoom)
-        
+          localStorage.setItem("selectedBlock", selectedBlock);
+          localStorage.setItem("selectedFloor", selectedFloor);
+          localStorage.setItem("selectedRoom", selectedRoom);
         }
-          //  else {
-          //   alert("User Exsits and already Room Alloted");
-          //   navigate("/home-page")
-          // }
-        })
-        .catch((err) => {console.log("Newtwork issue"),console.log(err.response.data)});
-    };
-  const selectedBlock=data.block
-  const selectedFloor=data.floor
-  const selectedRoom=data.room
-  const studentId=localStorage.getItem("studentId")
+        //  else {
+        //   alert("User Exsits and already Room Alloted");
+        //   navigate("/home-page")
+        // }
+      })
+      .catch((err) => {
+        console.log("Network issue");
+        console.log(err.response.data);
+      });
+  };
+
+  const selectedBlock = data.block;
+  const selectedFloor = data.floor;
+  const selectedRoom = data.room;
+  const studentId = localStorage.getItem("studentId");
   const [isAgreed, setIsAgreed] = useState(false);
+
   return (
     <>
       <div className="confirmRoom">
@@ -59,7 +59,7 @@ function ConfirmRoom(data) {
         </div>
       </div>
       <br />
-      {data.room != "" && (
+      {data.room !== "" && (
         <div className="confirmation">
           <input
             type="checkbox"
@@ -68,12 +68,11 @@ function ConfirmRoom(data) {
               else setIsAgreed(false);
             }}
           />{" "}
-          I agree that All choices made above are done by me and after I submit
+          I agree that all choices made above are done by me and after I submit
           no changes can be made further.
           <br />
           <br />
-          {isAgreed === true && <button onClick={confirmSubmit}>Submit</button>}
-          
+          {isAgreed && <button onClick={confirmSubmit}>Submit</button>}
           <br />
           <br />
         </div>
@@ -81,4 +80,5 @@ function ConfirmRoom(data) {
     </>
   );
 }
+
 export default ConfirmRoom;

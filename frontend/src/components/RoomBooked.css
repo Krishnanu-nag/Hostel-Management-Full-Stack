@@ -3,5 +3,6 @@
     height: 67vh;
     color: aliceblue;
     text-align: center;
+    z-index: -2;
    
 }

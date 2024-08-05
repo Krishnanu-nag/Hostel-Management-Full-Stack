@@ -28,7 +28,7 @@ function Timer() {
     return (
         <>
             <div className="timerContainer">
-                <span>Time Left</span>
+                <span>Time Left to Book : </span>
                 <div className="timer">
                     {showTimer(duration)}
                 </div>

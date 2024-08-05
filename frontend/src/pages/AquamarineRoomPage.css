@@ -15,5 +15,28 @@
 #aquamarineRoomPage select{
     border-radius: 10px;
 }
-/* 
-noixce */
+
+#legend{
+    padding-top:10px;
+    width: 160px;
+    margin: auto;
+    line-height: 30%;
+}
+.box{
+    width: 30px;
+    height: 30px;
+    border: 2px solid ;    
+}
+#vacant{
+    background-color: rgb(19, 180, 19);
+}
+#occupied{
+    background-color:red;
+}
+#selected{
+    background-color: blueviolet;
+}
+#legend label{
+    position: relative;
+    bottom:17px
+}

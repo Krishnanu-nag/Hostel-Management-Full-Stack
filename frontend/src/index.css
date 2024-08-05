@@ -93,8 +93,9 @@ button:hover{
 }
 .passwordVisbility{
   position: relative;
-  left: 60px;
-  bottom: 32px;
+  left: 56px;
+  bottom: 33px;
+  font-size: 13px;
 }
 /* Login Page css ends */
 

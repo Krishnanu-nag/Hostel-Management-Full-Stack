@@ -58,16 +58,19 @@
     position: static;
     vertical-align: middle;
     color: rgb(255, 255, 255);
+    background-color: rgb(19, 180, 19);
+    margin-bottom: 20px;
+    
 }
 
 /* When the radio button is checked, change the content */
 .custom-radio input[type="radio"]:checked + .checkmark {
-    background-color: #4caf50;                               
+    background-color: blueviolet;                               
     
 }
 
 .checkmark:hover{
     cursor: pointer;
-    background-color: #4caf50;
+    background-color: #2f4c30;
 }
 

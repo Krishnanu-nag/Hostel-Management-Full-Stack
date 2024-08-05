@@ -1,16 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+
 function RegisterPage() {
-  const [isRegistered,setIsRegistered]=useState(false)
+  const [isRegistered, setIsRegistered] = useState(false);
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  const baseURL = import.meta.env.VITE_BASE_URL;
+
   let submit = async (e) => {
     if (studentId != "" && password != "") {
       e.preventDefault();
     
-        await axios.post("http://localhost:3000/register-page", {
+        await axios.post(`${baseURL}/register-page`,  {
           studentId,
           password,
         })

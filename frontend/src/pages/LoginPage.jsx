@@ -1,11 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+
+// Access the base URL from the environment variables
+const baseURL = import.meta.env.VITE_BASE_URL;
+
 function LoginPage() {
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
   const [newLogin, setNewLogin] = useState(false);   //removes old login info saved on local storage if previously not removed by logging out 
   const navigate = useNavigate();
+
   if (!newLogin){
     localStorage.removeItem("studentId");
     localStorage.removeItem("password");
@@ -14,9 +19,8 @@ function LoginPage() {
     localStorage.removeItem("selectedRoom");
   }
   
-
   let submit = async (e) => {
-    if (studentId != "" && password != "") {
+    if (studentId !== "" && password !== "") {
       e.preventDefault();
       setNewLogin(true);  //old account details gets delected and new gets stored
       localStorage.setItem('studentId', studentId);
@@ -24,8 +28,7 @@ function LoginPage() {
       setStudentId(""); // Clear the form fields for better user experience
       setPassword("");
 
-      await axios
-        .post("http://localhost:3000/login-page", {
+      await axios.post(`${baseURL}/login-page`, {
           studentId,
           password,
         })
@@ -57,7 +60,6 @@ function LoginPage() {
     setShowPassword(!showPassword);
   };
   
-
   return (
     <>
       <div className="centerdiv" id="loginPage">
@@ -90,4 +92,5 @@ function LoginPage() {
     </>
   );
 }
+
 export default LoginPage;

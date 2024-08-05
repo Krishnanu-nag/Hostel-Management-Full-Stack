@@ -1,8 +1,8 @@
 import "./Navbar.css";
-import { Link,NavLink,useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 function Navbar() {
-  const navigate=useNavigate()
-  function logOut(){
+  const navigate = useNavigate()
+  function logOut() {
     localStorage.removeItem("studentId")
     localStorage.removeItem("password")
     navigate("/login-page")
@@ -24,7 +24,7 @@ function Navbar() {
             </span>
           </NavLink>
           <span className="dropdown">
-            <button className="dropbtn">Boys Hostel ⮟</button>
+            <button className="dropbtn">Boys Hostel◽ </button>
             <div className="dropdown-content">
               <Link to="/aquamarine-page" id="aquamarine">
                 Aquamrine
@@ -38,7 +38,7 @@ function Navbar() {
             </div>
           </span>
           <span className="dropdown">
-            <button className="dropbtn">Girls Hostel ⮟</button>
+            <button className="dropbtn">Girls Hostel◽ </button>
             <div className="dropdown-content">
               <Link to="/aquamarine-page" id="ruby">
                 Ruby
@@ -51,12 +51,17 @@ function Navbar() {
               </Link>
             </div>
           </span>
-          <span id="logOut" className="dropdown">
-            <button onClick={logOut} id="home-btn" className="dropbtn">
-              Log-out◽
-            </button>
+          <span className="dropdown">
+            <button className="dropbtn">{localStorage.getItem("studentId")}◽</button>
+            <span className="dropdown-content">
+              <a onClick={logOut} id="home-btn" className="dropbtn">
+                LogOut
+              </a>
+            </span>
           </span>
+
         </div>
+        <div className="copyright"><p> Developed by Krishnanu Nag &nbsp;22JE0500  </p></div>
       </header>
     </>
   );
