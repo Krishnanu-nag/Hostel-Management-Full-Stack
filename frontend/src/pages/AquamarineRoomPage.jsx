@@ -166,8 +166,8 @@ function AquamarineRoomPage() {
                     setSelectedRoom(e.target.value);
                   }}
                 >
-                  {/* Define your room layout here with radio buttons */}
-                  {["01", "02", "03", "04", "05", "10", "09", "08", "07", "6"].map((room) => (
+                  {/* room layout here with radio buttons */}
+                  {["01", "02", "03", "04", "05", "10", "09", "08", "07", "06"].map((room) => (
                     <label key={room} className="custom-radio">
                       <input value={room} type="radio" name="option" />
                       <span id={room} className="checkmark">
