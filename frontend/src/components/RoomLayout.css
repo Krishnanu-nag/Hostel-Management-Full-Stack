@@ -55,7 +55,7 @@
     width: 15%;
     height: 43%;
     border: 1px solid #ffffff;
-    position: relative;
+    position: static;
     vertical-align: middle;
     color: rgb(255, 255, 255);
 }
