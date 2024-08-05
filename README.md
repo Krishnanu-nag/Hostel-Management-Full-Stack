@@ -6,7 +6,7 @@ Welcome to the **Hostel Management System** repository! This project aims to pro
 
 ## Project Overview
 
-### 🌐 [Live Site](https://hostel-management-krishnanu-nag.netlify.app/)
+### 🌐 [Visit Website](https://hostel-management-krishnanu-nag.netlify.app/)
 
 The Hostel Management System is a web-based application that facilitates the management of hostel rooms, allocation of students, and monitoring of occupancy status.
 
@@ -32,9 +32,9 @@ The Hostel Management System is a web-based application that facilitates the man
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Important Notice
+## Important Notice and Warning
 
-**Do not copy the code from this repository without permission. Strict action will be taken against unauthorized use.**
+**Do not copy the code. Strict actions will be taken since the code is embedded with security meta tags, and anyone copying the code will be visible to us. GitHub will block the account responsible for any unauthorized copying.**
 
 ## Connect With Me
 - **Portfolio:** [Krishnanu Nag](https://krishnanu-nag.github.io/Portfolio_final/index.html)
