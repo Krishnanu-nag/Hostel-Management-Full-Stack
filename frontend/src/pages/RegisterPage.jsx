@@ -9,6 +9,7 @@ function RegisterPage() {
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
 
+
   let submit = async (e) => {
     if (studentId != "" && password != "") {
       e.preventDefault();
@@ -34,6 +35,19 @@ function RegisterPage() {
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
+
+  function guestLogin(){
+    localStorage.removeItem("studentId");
+    localStorage.removeItem("password");
+    localStorage.removeItem("selectedBlock");
+    localStorage.removeItem("selectedFloor");
+    localStorage.removeItem("selectedRoom");
+    localStorage.setItem("studentId","Admin")
+    localStorage.setItem("password","guest1234")
+  }
+
+  
+
   return (
     <>
       <div className="centerdiv" id="loginPage">
@@ -42,7 +56,7 @@ function RegisterPage() {
         <form className="loginForm">
           <input
             type="text"
-            placeholder="Enter Student ID"
+            placeholder="Student ID: 22JEXXXX"
             onChange={(e) => setStudentId(e.target.value.toUpperCase())}
           />
           <br />
@@ -65,7 +79,8 @@ function RegisterPage() {
         </button>
         <br />
         <br />
-        <Link to="/login-page">Already registered?</Link>
+        <Link to="/login-page">Already registered?</Link><br/><br/>
+        <Link to="/home-page" onClick={guestLogin}> Guest user no credentials Required</Link>
       </div>
     </>
   );

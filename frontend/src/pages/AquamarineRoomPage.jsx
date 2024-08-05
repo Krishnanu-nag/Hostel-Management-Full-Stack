@@ -144,16 +144,6 @@ function AquamarineRoomPage() {
                 </select>
                 <br />
                 <br />
-                {/* <button
-                  onClick={async (e) => {
-                    e.preventDefault();
-                    if(selectedBlock==""||selectedFloor=="") {
-                      alert("Please Select Block / Floor !! ");
-                    }
-                  }}
-                >
-                  Check Available Rooms
-                </button> */}
               </form>
             </div>
             {roomLayout && <Timer />}

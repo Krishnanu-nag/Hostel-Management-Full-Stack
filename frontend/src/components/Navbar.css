@@ -2,6 +2,7 @@
 header {
   position: sticky;
   top: 0;
+  z-index: 2;
   /* Ensure it stays on top */
 }
 
@@ -31,6 +32,8 @@ header {
   display: flex;
   align-items: center; /* Center vertically */
   gap: 10px; /* Add space between items */
+  z-index: 5;
+  position: relative;
 }
 
 /* Dropdown button styling */

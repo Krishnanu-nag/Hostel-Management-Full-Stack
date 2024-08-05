@@ -17,6 +17,13 @@ function LoginPage() {
     localStorage.removeItem("selectedBlock");
     localStorage.removeItem("selectedFloor");
     localStorage.removeItem("selectedRoom");
+  };
+
+
+
+  function guestLogin(){
+    localStorage.setItem("studentId","Admin")
+    localStorage.setItem("password","guest1234")
   }
   
   let submit = async (e) => {
@@ -68,7 +75,7 @@ function LoginPage() {
         <form className="loginForm">
           <input
             type="text"
-            placeholder="Enter Student ID"
+            placeholder="Student ID: 22JEXXXX"
             onChange={(e) => setStudentId(e.target.value.toUpperCase())}
           />
           <br />
@@ -87,7 +94,8 @@ function LoginPage() {
         <button type="submit" onClick={submit}>
           Login
         </button><br/><br/>
-        <Link to="/register-page">Not registered?</Link>
+        <Link to="/register-page">Not registered?</Link><br/><br/>
+        <Link to="/home-page" onClick={guestLogin}> Guest user no credentials required</Link>
       </div>
     </>
   );

@@ -11,7 +11,8 @@ function ConfirmRoom(data) {
 
   let confirmSubmit = async (e) => {
     e.preventDefault();
-    await axios
+    if(!(studentId=="Admin"))
+    {await axios
       .post(`${baseURL}/aquamarine-room-page`, {
         selectedBlock,
         selectedFloor,
@@ -34,7 +35,8 @@ function ConfirmRoom(data) {
       .catch((err) => {
         console.log("Network issue");
         console.log(err.response.data);
-      });
+      });}
+      else {alert(`Success !! ${localStorage.getItem("studentId")} your allotted room is ${data.block}/${data.floor}/${data.room} . Since you are a Guest Data is not registered in database !! `);navigate("/thanks-page")}
   };
 
   const selectedBlock = data.block;

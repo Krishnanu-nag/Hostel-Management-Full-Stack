@@ -1,21 +1,17 @@
-#aquamarineRoomLayout{
+#aquamarineRoomLayout {
     text-align: center;
-    margin:0 30px;
-
-   
+    margin: 0 30px;
 }
-#aquamarineRoomSelect{
+
+#aquamarineRoomSelect {
     text-align: center;
-    max-width: 330px ;  
+    max-width: 330px;
     background-color: rgb(58, 57, 56);
     padding: 20px;
     margin: auto;
     height: 10em;
-
+    position: relative; /* Add this */
 }
-
-
- /* instead of changing shape of radio button add a div/span adjacent to it and hide the radios by default and show only the div/span as label and change color of div when checked this will look as if we checking the checkbox actually we are selecting the label and the label gets color filled when clicked and not the radio buttons */
 
 .custom-radio input[type="radio"] {
     display: none;
@@ -23,7 +19,7 @@
 
 /* Create a custom checkmark */
 .custom-radio .checkmark {
-    margin: 0 5px ;    
+    margin: 0 5px;
     display: inline-block;
     width: 15%;
     height: 43%;
@@ -33,17 +29,15 @@
     color: rgb(255, 255, 255);
     background-color: rgb(19, 180, 19);
     margin-bottom: 20px;
-    
+    z-index: 1; /* Adjust z-index */
 }
 
 /* When the radio button is checked, change the content */
 .custom-radio input[type="radio"]:checked + .checkmark {
-    background-color: blueviolet;                               
-    
+    background-color: blueviolet;
 }
 
-.checkmark:hover{
+.checkmark:hover {
     cursor: pointer;
     background-color: #2f4c30;
 }
-

@@ -9,6 +9,14 @@ function LandingPage() {
     document.querySelector(".title").style.color = "black";
   }
 
+  function newLogin(){
+    localStorage.removeItem("studentId");
+    localStorage.removeItem("password");
+    localStorage.removeItem("selectedBlock");
+    localStorage.removeItem("selectedFloor");
+    localStorage.removeItem("selectedRoom");
+  }
+
   return (
     <>
       <div className="centerdiv" id="landingPage">
@@ -16,7 +24,7 @@ function LandingPage() {
         <p className="title">IIT ISM Hostel Management Portal</p>
         <Link to="/register-page">
           {" "}
-          <button
+          <button onClick={newLogin}
             className="login_btn"
             onMouseEnter={colorchangeEnter}
             onMouseLeave={() => {
