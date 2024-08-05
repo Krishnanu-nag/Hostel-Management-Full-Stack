@@ -28,7 +28,7 @@
     width: 15%;
     height: 43%;
     border: 1px solid #ffffff;
-    position: static;
+    position: relative;
     vertical-align: middle;
     color: rgb(255, 255, 255);
     background-color: rgb(19, 180, 19);
