@@ -29,7 +29,7 @@ function LoginPage() {
   let submit = async (e) => {
     if (studentId !== "" && password !== "") {
       e.preventDefault();
-      setButtonText('Wait...');
+      setButtonText('Verifying...');
       setIsButtonDisabled(true);
 
       setNewLogin(true);  // Old account details get deleted and new ones get stored
