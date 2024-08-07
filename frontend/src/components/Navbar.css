@@ -40,7 +40,7 @@ header {
 .dropbtn {
   background-color: transparent;
   color: rgb(0, 0, 0);
-  padding: 7px;
+  padding: 3px;
   font-size: 17px;
   border: none;
   cursor: pointer; /* Show pointer cursor on hover */
