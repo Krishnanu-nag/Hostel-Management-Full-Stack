@@ -1,6 +1,7 @@
 import MainLayout from "../layout/MainLayout";
 import "./AquamarinePage.css";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
 
 // Access the base URL from the environment variables
@@ -8,9 +9,14 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 
 function AquamarinePage() {
   const navigate = useNavigate(); // Move this to the top level of the component
+  const [buttonText, setButtonText] = useState('Proceed to book your room');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   async function isAlloted() {
     const studentId = localStorage.getItem("studentId"); // Retrieve studentId from localStorage
+
+    setButtonText('Checking...');
+    setIsButtonDisabled(true);
 
     try {
       const result = await axios.post(
@@ -26,6 +32,9 @@ function AquamarinePage() {
       }
     } catch (error) {
       console.error("Some error occurred:", error); // Improved error logging
+    } finally {
+      setButtonText('Proceed to book your room');
+      setIsButtonDisabled(false);
     }
   }
 
@@ -35,7 +44,9 @@ function AquamarinePage() {
       <div id="aquamarinePage">
         <h1>Aquamarine Hostel</h1>
         <div id="aquaBookRoom">
-          <button onClick={isAlloted}>Proceed to book your room</button>
+          <button onClick={isAlloted} disabled={isButtonDisabled}>
+            {buttonText}
+          </button>
         </div>
         <div className="aquaContent">
           {/* Content sections remain unchanged */}

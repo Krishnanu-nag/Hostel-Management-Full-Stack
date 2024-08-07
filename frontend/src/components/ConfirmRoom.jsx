@@ -8,35 +8,45 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 
 function ConfirmRoom(data) {
   const navigate = useNavigate();
+  const [buttonText, setButtonText] = useState('Submit');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  let confirmSubmit = async (e) => {
+  const confirmSubmit = async (e) => {
     e.preventDefault();
-    if(!(studentId=="Admin"))
-    {await axios
-      .post(`${baseURL}/aquamarine-room-page`, {
-        selectedBlock,
-        selectedFloor,
-        selectedRoom,
-        studentId,
-      })
-      .then((result) => {
-        if (result.data === "AllocationSuccess") {
-          alert(`Success your allotted room is ${data.block}/${data.floor}/${data.room}`);
-          navigate("/room-booked-page");
-          localStorage.setItem("selectedBlock", selectedBlock);
-          localStorage.setItem("selectedFloor", selectedFloor);
-          localStorage.setItem("selectedRoom", selectedRoom);
-        }
-        //  else {
-        //   alert("User Exsits and already Room Alloted");
-        //   navigate("/home-page")
-        // }
-      })
-      .catch((err) => {
-        console.log("Network issue");
-        console.log(err.response.data);
-      });}
-      else {alert(`Success !! ${localStorage.getItem("studentId")} your allotted room is ${data.block}/${data.floor}/${data.room} . Since you are a Guest , allocation data will not be registered in database !! `);navigate("/thanks-page")}
+    setButtonText('Submiting...');
+    setIsButtonDisabled(true);
+
+    if (studentId !== "Admin") {
+      await axios
+        .post(`${baseURL}/aquamarine-room-page`, {
+          selectedBlock,
+          selectedFloor,
+          selectedRoom,
+          studentId,
+        })
+        .then((result) => {
+          if (result.data === "AllocationSuccess") {
+            alert(`Success your allotted room is ${data.block}/${data.floor}/${data.room}`);
+            navigate("/room-booked-page");
+            localStorage.setItem("selectedBlock", selectedBlock);
+            localStorage.setItem("selectedFloor", selectedFloor);
+            localStorage.setItem("selectedRoom", selectedRoom);
+          }
+        })
+        .catch((err) => {
+          console.log("Network issue");
+          console.log(err.response.data);
+        })
+        .finally(() => {
+          setButtonText('Submit');
+          setIsButtonDisabled(false);
+        });
+    } else {
+      alert(`Success !! ${localStorage.getItem("studentId")} your allotted room is ${data.block}/${data.floor}/${data.room} . Since you are a Guest, allocation data will not be registered in the database !!`);
+      navigate("/thanks-page");
+      setButtonText('Submit');
+      setIsButtonDisabled(false);
+    }
   };
 
   const selectedBlock = data.block;
@@ -65,16 +75,17 @@ function ConfirmRoom(data) {
         <div className="confirmation">
           <input
             type="checkbox"
-            onChange={(e) => {
-              if (e.target.checked) setIsAgreed(true);
-              else setIsAgreed(false);
-            }}
+            onChange={(e) => setIsAgreed(e.target.checked)}
           />{" "}
           I agree that all choices made above are done by me and after I submit
           no changes can be made further.
           <br />
           <br />
-          {isAgreed && <button onClick={confirmSubmit}>Submit</button>}
+          {isAgreed && (
+            <button onClick={confirmSubmit} disabled={isButtonDisabled}>
+              {buttonText}
+            </button>
+          )}
           <br />
           <br />
         </div>

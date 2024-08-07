@@ -6,30 +6,43 @@ function RegisterPage() {
   const [isRegistered, setIsRegistered] = useState(false);
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
+  const [buttonText, setButtonText] = useState('Register');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
 
-
   let submit = async (e) => {
-    if (studentId != "" && password != "") {
+    if (studentId !== "" && password !== "") {
       e.preventDefault();
-    
-        await axios.post(`${baseURL}/register-page`,  {
+      setButtonText('Wait...');
+      setIsButtonDisabled(true);
+
+      await axios.post(`${baseURL}/register-page`,  {
           studentId,
           password,
         })
       .then((result)=>{
-        if (result.data==="ExistingUser") {alert("User Exists!!! Go to  Login"),navigate("/login-page")}
-        else  {alert("Successfully Registered !!! Now Login"),navigate("/login-page")}
+        if (result.data==="ExistingUser") {
+          alert("User Exists!!! Go to  Login");
+          navigate("/login-page");
+        } else {
+          alert("Successfully Registered !!! Now Login");
+          navigate("/login-page");
+        }
       })       
-      .catch ((e)=>{ console.log(e);}) 
-       
-    }
-      // 
-     else {
+      .catch ((e) => {
+        console.log(e);
+      }) 
+      .finally(() => {
+        setButtonText('Register');
+        setIsButtonDisabled(false);
+      });
+
+    } else {
       alert("Please enter credentials");
     }
-  }
+  };
+
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePassword = () => {
@@ -42,11 +55,9 @@ function RegisterPage() {
     localStorage.removeItem("selectedBlock");
     localStorage.removeItem("selectedFloor");
     localStorage.removeItem("selectedRoom");
-    localStorage.setItem("studentId","Admin")
-    localStorage.setItem("password","guest1234")
+    localStorage.setItem("studentId","Admin");
+    localStorage.setItem("password","guest1234");
   }
-
-  
 
   return (
     <>
@@ -71,18 +82,17 @@ function RegisterPage() {
             {showPassword ? "Hide" : "Show"}
           </a>
           <br />
-          {/* <span className="showpassword" onClick={show}>Show</span> */}
-          <br />
         </form>
-        <button type="submit" onClick={submit}>
-          Register
+        <button type="submit" onClick={submit} disabled={isButtonDisabled}>
+          {buttonText}
         </button>
         <br />
         <br />
         <Link to="/login-page">Already registered?</Link><br/><br/>
-        <Link to="/home-page" onClick={guestLogin}> Guest user no credentials Required</Link>
+        <Link to="/home-page" onClick={guestLogin}>Guest User <br/>(No credentials Required)</Link>
       </div>
     </>
   );
 }
+
 export default RegisterPage;

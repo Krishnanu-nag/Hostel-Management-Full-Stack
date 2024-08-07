@@ -8,7 +8,9 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 function LoginPage() {
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
-  const [newLogin, setNewLogin] = useState(false);   //removes old login info saved on local storage if previously not removed by logging out 
+  const [newLogin, setNewLogin] = useState(false);   // Removes old login info saved on local storage if previously not removed by logging out 
+  const [buttonText, setButtonText] = useState('Login');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate();
 
   if (!newLogin){
@@ -19,21 +21,20 @@ function LoginPage() {
     localStorage.removeItem("selectedRoom");
   };
 
-
-
   function guestLogin(){
-    localStorage.setItem("studentId","Admin")
-    localStorage.setItem("password","guest1234")
+    localStorage.setItem("studentId","Admin");
+    localStorage.setItem("password","guest1234");
   }
   
   let submit = async (e) => {
     if (studentId !== "" && password !== "") {
       e.preventDefault();
-      setNewLogin(true);  //old account details gets delected and new gets stored
+      setButtonText('Wait...');
+      setIsButtonDisabled(true);
+
+      setNewLogin(true);  // Old account details get deleted and new ones get stored
       localStorage.setItem('studentId', studentId);
       localStorage.setItem('password', password);
-      setStudentId(""); // Clear the form fields for better user experience
-      setPassword("");
 
       await axios.post(`${baseURL}/login-page`, {
           studentId,
@@ -45,7 +46,7 @@ function LoginPage() {
             navigate("/home-page");
           } else if (result.data === "Failed") {
             alert("Invalid Password");
-            window.location.reload(false); //refreshes page for invalid credentials
+            window.location.reload(false); // Refreshes page for invalid credentials
           } else if (result.data === "Invalid") {
             alert("User not registered. Please Register !!!");
             navigate("/register-page");
@@ -53,9 +54,12 @@ function LoginPage() {
         })
         .catch((e) => {
           console.log(e);
+        })
+        .finally(() => {
+          setButtonText('Login');
+          setIsButtonDisabled(false);
         });
     }
-    //
     else {
       alert("Please enter credentials");
     }
@@ -91,11 +95,11 @@ function LoginPage() {
           </a>
           <br />
         </form>
-        <button type="submit" onClick={submit}>
-          Login
+        <button type="submit" onClick={submit} disabled={isButtonDisabled}>
+          {buttonText}
         </button><br/><br/>
         <Link to="/register-page">Not registered?</Link><br/><br/>
-        <Link to="/home-page" onClick={guestLogin}> Guest user no credentials required</Link>
+        <Link to="/home-page" onClick={guestLogin}>Guest User <br/>(No credentials Required)</Link>
       </div>
     </>
   );
