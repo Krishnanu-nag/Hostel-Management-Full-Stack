@@ -32,6 +32,8 @@ function ConfirmRoom(data) {
             localStorage.setItem("selectedFloor", selectedFloor);
             localStorage.setItem("selectedRoom", selectedRoom);
           }
+          else alert(`Already Room Allocated`);
+          navigate("/room-booked-page")
         })
         .catch((err) => {
           console.log("Network issue");
@@ -56,7 +58,9 @@ function ConfirmRoom(data) {
   const [isAgreed, setIsAgreed] = useState(false);
 
   return (
-    <>
+    <> 
+       <br/>
+       <br/>
       <div className="confirmRoom">
         <div className="container" id="block">
           <h1>{data.block}</h1>
