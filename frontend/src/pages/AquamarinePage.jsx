@@ -40,7 +40,7 @@ function AquamarinePage() {
 
   return (
     <MainLayout>
-      <img id="aqua-img" src="/aquamarine.png" alt="Aquamarine Hostel" /> {/* Corrected path and added alt attribute */}
+      <img id="aqua-img" src="/aquamarine.jpeg" alt="Aquamarine Hostel" /> {/* Corrected path and added alt attribute */}
       <div id="aquamarinePage">
         <h1>Aquamarine Hostel</h1>
         <div id="aquaBookRoom">
