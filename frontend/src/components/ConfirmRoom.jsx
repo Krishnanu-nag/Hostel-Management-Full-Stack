@@ -39,10 +39,6 @@ function ConfirmRoom(data) {
           console.log("Network issue");
           console.log(err.response.data);
         })
-        .finally(() => {
-          setButtonText('Submit');
-          setIsButtonDisabled(false);
-        });
     } else {
       alert(`Success !! ${localStorage.getItem("studentId")} your allotted room is ${data.block}/${data.floor}/${data.room} . Since you are a Guest, allocation data will not be registered in the database !!`);
       navigate("/thanks-page");
