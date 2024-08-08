@@ -40,6 +40,7 @@ function AquamarineRoomPage() {
     }
   };
 
+
   useEffect(() => {
     if (selectedBlock && selectedFloor) {
       fetchOccupiedRooms();
