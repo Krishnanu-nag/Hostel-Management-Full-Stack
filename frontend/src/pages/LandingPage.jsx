@@ -8,14 +8,16 @@ function LandingPage() {
   function colorchangeOut() {
     document.querySelector(".title").style.color = "black";
   }
+  
+   //IIFE called
 
-  function newLogin(){
-    localStorage.removeItem("studentId");
+  (function (){
+    localStorage.removeItem("studentId");            
     localStorage.removeItem("password");
     localStorage.removeItem("selectedBlock");
     localStorage.removeItem("selectedFloor");
     localStorage.removeItem("selectedRoom");
-  }
+  })();
 
   return (
     <>
@@ -24,7 +26,7 @@ function LandingPage() {
         <p className="title">IIT ISM Hostel Management Portal</p>
         <Link to="/register-page">
           {" "}
-          <button onClick={newLogin}
+          <button
             className="login_btn"
             onMouseEnter={colorchangeEnter}
             onMouseLeave={() => {
