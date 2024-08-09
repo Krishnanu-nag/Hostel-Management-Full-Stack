@@ -101,7 +101,7 @@ button:hover{
 
 
 .loader-fetching-room {
-  animation: blink 1s infinite;
+  animation: blink 1.5s infinite;
   padding: 30px;
 }
 
