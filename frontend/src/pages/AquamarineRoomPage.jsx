@@ -62,13 +62,7 @@ function AquamarineRoomPage() {
 
     // Apply new styles for occupied rooms
     occupiedRooms.forEach((roomNumber) => {
-      let occupied;
-      if (roomNumber !== "10") {
-        occupied = document.getElementById(`${roomNumber}`);
-      } else {
-        occupied = document.getElementById(`10`);
-      }
-
+      const occupied = document.getElementById(`${roomNumber}`);
       if (occupied) {
         occupied.style.backgroundColor = "red";
         const inputElement = occupied.previousElementSibling;
@@ -155,31 +149,33 @@ function AquamarineRoomPage() {
             {isLoading ? (
               <p>Loading data...</p> // Display loading text while data is being fetched
             ) : (
-              roomLayout && (
-                <div id="aquamarineRoomLayout">
-                  <div
-                    id="aquamarineRoomSelect"
-                    onChange={(e) => {
-                      setSelectedRoom(e.target.value);
-                    }}
-                  >
-                    {/* room layout here with radio buttons */}
-                    {["01", "02", "03", "04", "05", "10", "09", "08", "07", "06"].map((room) => (
-                      <label key={room} className="custom-radio">
-                        <input value={room} type="radio" name="option" />
-                        <span id={room} className="checkmark">
-                          <p className="centerdiv">{room}</p>
-                        </span>
-                      </label>
-                    ))}
+              <>
+                {roomLayout && (
+                  <div id="aquamarineRoomLayout">
+                    <div
+                      id="aquamarineRoomSelect"
+                      onChange={(e) => {
+                        setSelectedRoom(e.target.value);
+                      }}
+                    >
+                      {/* room layout here with radio buttons */}
+                      {["01", "02", "03", "04", "05", "10", "09", "08", "07", "06"].map((room) => (
+                        <label key={room} className="custom-radio">
+                          <input value={room} type="radio" name="option" />
+                          <span id={room} className="checkmark">
+                            <p className="centerdiv">{room}</p>
+                          </span>
+                        </label>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )
-            )}
-            <br />
-            <br />
-            {isCheckRoom && (
-              <ConfirmRoom block={selectedBlock} floor={selectedFloor} room={selectedRoom} />
+                )}
+                <br />
+                <br />
+                {isCheckRoom && (
+                  <ConfirmRoom block={selectedBlock} floor={selectedFloor} room={selectedRoom} />
+                )}
+              </>
             )}
           </div>
         </MainLayout>
