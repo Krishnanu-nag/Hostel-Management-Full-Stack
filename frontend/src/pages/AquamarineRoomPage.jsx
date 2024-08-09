@@ -19,11 +19,13 @@ function AquamarineRoomPage() {
   const [selectedRoom, setSelectedRoom] = useState("");
   const [roomLayout, setRoomLayout] = useState(false);
   const [occupiedRooms, setOccupiedRooms] = useState([]);
+  const [isLoading, setIsLoading] = useState(false); // State for loading status
   const studentId = localStorage.getItem("studentId");
   const password = localStorage.getItem("password");
 
   const fetchOccupiedRooms = async () => {
     try {
+      setIsLoading(true); // Start loading
       // Make a POST request to the backend with selectedFloor and selectedBlock
       const response = await axios.post(`${baseURL}/occupied-rooms`, {
         selectedFloor: selectedFloor,
@@ -37,9 +39,10 @@ function AquamarineRoomPage() {
     } catch (error) {
       // Log any error that occurs during the request
       console.error("Error fetching occupied rooms:", error);
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
-
 
   useEffect(() => {
     if (selectedBlock && selectedFloor) {
@@ -149,25 +152,29 @@ function AquamarineRoomPage() {
             </div>
             {roomLayout && <Timer />}
             <br />
-            {roomLayout && (
-              <div id="aquamarineRoomLayout">
-                <div
-                  id="aquamarineRoomSelect"
-                  onChange={(e) => {
-                    setSelectedRoom(e.target.value);
-                  }}
-                >
-                  {/* room layout here with radio buttons */}
-                  {["01", "02", "03", "04", "05", "10", "09", "08", "07", "06"].map((room) => (
-                    <label key={room} className="custom-radio">
-                      <input value={room} type="radio" name="option" />
-                      <span id={room} className="checkmark">
-                        <p className="centerdiv">{room}</p>
-                      </span>
-                    </label>
-                  ))}
+            {isLoading ? (
+              <p>Loading data...</p> // Display loading text while data is being fetched
+            ) : (
+              roomLayout && (
+                <div id="aquamarineRoomLayout">
+                  <div
+                    id="aquamarineRoomSelect"
+                    onChange={(e) => {
+                      setSelectedRoom(e.target.value);
+                    }}
+                  >
+                    {/* room layout here with radio buttons */}
+                    {["01", "02", "03", "04", "05", "10", "09", "08", "07", "06"].map((room) => (
+                      <label key={room} className="custom-radio">
+                        <input value={room} type="radio" name="option" />
+                        <span id={room} className="checkmark">
+                          <p className="centerdiv">{room}</p>
+                        </span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )
             )}
             <br />
             <br />
@@ -177,7 +184,7 @@ function AquamarineRoomPage() {
           </div>
         </MainLayout>
       ) : (
-        <LoginPage/>
+        <LoginPage />
       )}
     </>
   );

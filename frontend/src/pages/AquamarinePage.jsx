@@ -9,37 +9,38 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 
 function AquamarinePage() {
   const navigate = useNavigate(); // Move this to the top level of the component
-  const [buttonText, setButtonText] = useState('Proceed to book your room');
+  const [buttonText, setButtonText] = useState("Proceed to book your room");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   async function isAlloted() {
     const studentId = localStorage.getItem("studentId"); // Retrieve studentId from localStorage
 
-    setButtonText('Checking...');
+    setButtonText("Checking...");
     setIsButtonDisabled(true);
-    if(studentId=="Admin") navigate("/aquamarine-room-page");
-    else
+    if (studentId == "Admin") navigate("/aquamarine-room-page");
+    else {
+      try {
+        const result = await axios.post(
+          `${baseURL}/aquamarine-room-page-check-alloted?`,
+          { studentId }
+        );
 
-{    try {
-      const result = await axios.post(
-        `${baseURL}/aquamarine-room-page-check-alloted?`,
-        { studentId }
-      );
-
-      if (result.data === "AlreadyAlloted") {
-        alert(`${studentId} has already been allotted a room`);
-        navigate("/home-page");
-      } else {
-        navigate("/aquamarine-room-page");
+        if (result.data === "AlreadyAlloted") {
+          alert(`${studentId} has already been allotted a room`);
+          navigate("/home-page");
+        } else {
+          navigate("/aquamarine-room-page");
+        }
+      } catch (error) {
+        console.error("Some error occurred:", error); // Improved error logging
       }
-    } catch (error) {
-      console.error("Some error occurred:", error); // Improved error logging
-    } }
+    }
   }
 
   return (
     <MainLayout>
-      <img id="aqua-img" src="/aquamarine.jpeg" alt="Aquamarine Hostel" /> {/* Corrected path and added alt attribute */}
+      <img id="aqua-img" src="/aquamarine.jpeg" alt="Aquamarine Hostel" />{" "}
+      {/* Corrected path and added alt attribute */}
       <div id="aquamarinePage">
         <h1>Aquamarine Hostel</h1>
         <div id="aquaBookRoom">
@@ -51,13 +52,13 @@ function AquamarinePage() {
           {/* Content sections remain unchanged */}
           <h3>A Home Away from Home</h3>
           <p>
-            The Aquamarine Hostel at the Indian Institute of Technology
-            (Indian School of Mines), Dhanbad, stands as a symbol of the
-            institute’s commitment to providing a holistic and enriching
-            experience for its residents. Nestled within the sprawling campus
-            of IIT ISM, Aquamarine Hostel is designed to meet the diverse
-            needs of students, fostering an environment conducive to academic
-            excellence, personal growth, and social engagement.
+            The Aquamarine Hostel at the Indian Institute of Technology (Indian
+            School of Mines), Dhanbad, stands as a symbol of the institute’s
+            commitment to providing a holistic and enriching experience for its
+            residents. Nestled within the sprawling campus of IIT ISM,
+            Aquamarine Hostel is designed to meet the diverse needs of students,
+            fostering an environment conducive to academic excellence, personal
+            growth, and social engagement.
           </p>
           <h3>Accommodation and Amenities</h3>
           <p>
@@ -69,9 +70,9 @@ function AquamarinePage() {
           <h3>Dining Facilities</h3>
           <p>
             The hostel mess serves nutritious and delicious meals, catering to
-            diverse tastes and dietary requirements. Hygiene and cleanliness
-            are prioritized, ensuring a pleasant and safe dining experience.
-            Special meals during festivals add a touch of home to hostel life.
+            diverse tastes and dietary requirements. Hygiene and cleanliness are
+            prioritized, ensuring a pleasant and safe dining experience. Special
+            meals during festivals add a touch of home to hostel life.
           </p>
           <h3>Extracurricular Activities and Recreation</h3>
           <p>
