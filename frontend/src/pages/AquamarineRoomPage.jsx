@@ -18,12 +18,19 @@ function AquamarineRoomPage() {
   const [selectedFloor, setSelectedFloor] = useState("");
   const [selectedRoom, setSelectedRoom] = useState("");
   const [roomLayout, setRoomLayout] = useState(false);
+  const [loader, setLoader] = useState("Loading data... Please Wait");
   const [occupiedRooms, setOccupiedRooms] = useState([]);
   const [isLoading, setIsLoading] = useState(false); // State for loading status
   const studentId = localStorage.getItem("studentId");
   const password = localStorage.getItem("password");
 
+ 
   const fetchOccupiedRooms = async () => {
+    // Display initial loader message
+    const loaderTimeout = setTimeout(() => {
+      setLoader("Taking longer than usual... Please wait");
+    }, 3000);
+  
     try {
       setIsLoading(true); // Start loading
       // Make a POST request to the backend with selectedFloor and selectedBlock
@@ -31,7 +38,10 @@ function AquamarineRoomPage() {
         selectedFloor: selectedFloor,
         selectedBlock: selectedBlock,
       });
-
+  
+      // Clear the timeout to prevent the message from changing after data is fetched
+      clearTimeout(loaderTimeout);
+  
       // Set the state with the received array of occupied rooms
       setOccupiedRooms(response.data);
       setRoomLayout(true);
@@ -43,7 +53,7 @@ function AquamarineRoomPage() {
       setIsLoading(false); // Stop loading
     }
   };
-
+  
   useEffect(() => {
     if (selectedBlock && selectedFloor) {
       fetchOccupiedRooms();
@@ -147,7 +157,7 @@ function AquamarineRoomPage() {
             {roomLayout && <Timer />}
             <br />
             {isLoading ? (
-              <p className="loader-fetching-room">Loading data... Please Wait</p> // Display loading text while data is being fetched
+              <p className="loader-fetching-room">{loader}</p> // Display loading text while data is being fetched
             ) : (
               <>
                 {roomLayout && (
@@ -190,7 +200,7 @@ function AquamarineRoomPage() {
                       ).map((room) => (
                         <label key={room} className="custom-radio">
                           <input value={room} type="radio" name="option" />
-                          <span id={room} className="checkmark">
+                           <span id={room} className="checkmark">
                             <p className="centerdiv">{room}</p>
                           </span>
                         </label>
