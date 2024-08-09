@@ -41,6 +41,7 @@ function AquamarineRoomPage() {
   
       // Clear the timeout to prevent the message from changing after data is fetched
       clearTimeout(loaderTimeout);
+      setLoader("Loading data... Please Wait"); //restoring the msg 
   
       // Set the state with the received array of occupied rooms
       setOccupiedRooms(response.data);

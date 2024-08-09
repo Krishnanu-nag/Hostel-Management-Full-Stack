@@ -40,7 +40,7 @@ function ConfirmRoom(data) {
           console.log(err.response.data);
         })
     } else {
-      alert(`Success !! ${localStorage.getItem("studentId")} your allotted room is ${data.block}/${data.floor}/${data.room} . Since you are a Guest, allocation data will not be registered in the database !!`);
+      alert(`Success !! ${localStorage.getItem("studentId")} your allotted room is ${data.block}/${data.floor}/${data.room} . Since you are a Guest,Allocated room will not be registered in the database !!`);
       navigate("/thanks-page");
       setButtonText('Submit');
       setIsButtonDisabled(false);
