@@ -168,6 +168,57 @@ app.post("/login-page", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+app.post('/aquamarine-room-page', async (req, res) => {
+  const { selectedBlock, selectedFloor, selectedRoom, studentId } = req.body;
+  
+  // Start a session
+  const session = await mongoose.startSession();
+  session.startTransaction();
+  
+  try {
+    // Check if the room is already allocated to someone else within the transaction
+    const roomOccupied = await AllocatedRoomModel.findOne({ 
+      selectedBlock, 
+      selectedFloor, 
+      selectedRoom 
+    }).session(session);
+
+    if (roomOccupied) {
+      await session.abortTransaction(); // Abort the transaction
+      session.endSession();
+      return res.json('RoomAlreadyBooked');
+    }
+
+    // Check if the student already has an allocated room
+    const user = await AllocatedRoomModel.findOne({ studentId }).session(session);
+    if (user) {
+      await session.abortTransaction(); // Abort the transaction
+      session.endSession();
+      return res.json('AllocationFailed');
+    }
+
+    // Allocate the room
+    const data = {
+      selectedBlock,
+      selectedFloor,
+      selectedRoom,
+      studentId,
+    };
+    await AllocatedRoomModel.create([data], { session });
+
+    // Commit the transaction
+    await session.commitTransaction();
+    session.endSession();
+    
+    return res.json('AllocationSuccess');
+  } catch (error) {
+    console.error('Error in room allocation:', error);
+    await session.abortTransaction(); // Abort the transaction in case of error
+    session.endSession();
+    res.status(500).send('Internal Server Error');
+  }
+});
 app.post("/aquamarine-room-page-check-alloted", async (req, res) => {
   const { studentId } = req.body;
   try {
