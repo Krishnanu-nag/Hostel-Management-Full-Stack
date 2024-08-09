@@ -147,7 +147,7 @@ function AquamarineRoomPage() {
             {roomLayout && <Timer />}
             <br />
             {isLoading ? (
-              <p>Loading data...</p> // Display loading text while data is being fetched
+              <p className="loader-fetching-room">Loading data... Please Wait</p> // Display loading text while data is being fetched
             ) : (
               <>
                 {roomLayout && (
@@ -158,8 +158,36 @@ function AquamarineRoomPage() {
                         setSelectedRoom(e.target.value);
                       }}
                     >
-                      {/* room layout here with radio buttons */}
-                      {["01", "02", "03", "04", "05", "10", "09", "08", "07", "06"].map((room) => (
+                      {/* Dynamically generate room options based on selected block */}
+                      {(selectedBlock === "E"
+                        ? [
+                            "01",
+                            "02",
+                            "03",
+                            "04",
+                            "05",
+                            "06",
+                            "07",
+                            "08",
+                            "09",
+                            "10",
+                            "11",
+                            "12",
+                            "13",
+                          ]
+                        : [
+                            "01",
+                            "02",
+                            "03",
+                            "04",
+                            "05",
+                            "10",
+                            "09",
+                            "08",
+                            "07",
+                            "06",
+                          ]
+                      ).map((room) => (
                         <label key={room} className="custom-radio">
                           <input value={room} type="radio" name="option" />
                           <span id={room} className="checkmark">
@@ -170,10 +198,13 @@ function AquamarineRoomPage() {
                     </div>
                   </div>
                 )}
-                <br />
-                <br />
+
                 {isCheckRoom && (
-                  <ConfirmRoom block={selectedBlock} floor={selectedFloor} room={selectedRoom} />
+                  <ConfirmRoom
+                    block={selectedBlock}
+                    floor={selectedFloor}
+                    room={selectedRoom}
+                  />
                 )}
               </>
             )}
