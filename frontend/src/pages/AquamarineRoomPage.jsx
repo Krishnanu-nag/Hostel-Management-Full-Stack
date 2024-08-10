@@ -46,6 +46,7 @@ function AquamarineRoomPage() {
       setOccupiedRooms(response.data);
       setRoomLayout(true);
       setCheckRoom(true);
+      setLoader("Loading data... Please Wait")
     } catch (error) {
       // Log any error that occurs during the request
       console.error("Error fetching occupied rooms:", error);
