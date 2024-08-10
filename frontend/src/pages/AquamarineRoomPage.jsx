@@ -24,25 +24,24 @@ function AquamarineRoomPage() {
   const studentId = localStorage.getItem("studentId");
   const password = localStorage.getItem("password");
 
- 
   const fetchOccupiedRooms = async () => {
     // Display initial loader message
     const loaderTimeout = setTimeout(() => {
       setLoader("Taking longer than usual... Please wait");
     }, 3000);
-  
+
     try {
       setIsLoading(true); // Start loading
       // Make a POST request to the backend with selectedFloor and selectedBlock
       const response = await axios.post(`${baseURL}/occupied-rooms`, {
-        selectedFloor: selectedFloor,
-        selectedBlock: selectedBlock,
+        selectedFloor,
+        selectedBlock,
       });
-  
+
       // Clear the timeout to prevent the message from changing after data is fetched
       clearTimeout(loaderTimeout);
-      setLoader("Loading data... Please Wait"); //restoring the msg 
-  
+      setLoader("Loading data... Please Wait"); // Restore the original message
+
       // Set the state with the received array of occupied rooms
       setOccupiedRooms(response.data);
       setRoomLayout(true);
@@ -54,7 +53,7 @@ function AquamarineRoomPage() {
       setIsLoading(false); // Stop loading
     }
   };
-  
+
   useEffect(() => {
     if (selectedBlock && selectedFloor) {
       fetchOccupiedRooms();
@@ -75,10 +74,10 @@ function AquamarineRoomPage() {
     occupiedRooms.forEach((roomNumber) => {
       const occupied = document.getElementById(`${roomNumber}`);
       if (occupied) {
-        occupied.style.backgroundColor = "red";
+        occupied.style.backgroundColor = "red"; // Color occupied rooms red
         const inputElement = occupied.previousElementSibling;
         if (inputElement) {
-          inputElement.disabled = true; // Disable input
+          inputElement.disabled = true; // Disable input for occupied rooms
         }
       }
     });
@@ -163,48 +162,82 @@ function AquamarineRoomPage() {
               <>
                 {roomLayout && (
                   <div id="aquamarineRoomLayout">
-                    <div
-                      id="aquamarineRoomSelect"
-                      onChange={(e) => {
-                        setSelectedRoom(e.target.value);
-                      }}
-                    >
-                      {/* Dynamically generate room options based on selected block */}
+                    <div id="aquamarineRoomSelect">
                       {(selectedBlock === "E"
                         ? [
-                            "01",
-                            "02",
-                            "03",
-                            "04",
-                            "05",
                             "06",
                             "07",
+                            "05",
                             "08",
+                            "04",
                             "09",
+                            "03",
                             "10",
+                            "02",
                             "11",
+                            "01",
                             "12",
                             "13",
                           ]
                         : [
-                            "01",
-                            "02",
-                            "03",
-                            "04",
-                            "05",
                             "10",
+                            "01",
                             "09",
+                            "02",
                             "08",
+                            "03",
                             "07",
+                            "04",
                             "06",
+                            "05",
                           ]
                       ).map((room) => (
-                        <label key={room} className="custom-radio">
-                          <input value={room} type="radio" name="option" />
-                           <span id={room} className="checkmark">
-                            <p className="centerdiv">{room}</p>
-                          </span>
-                        </label>
+                        <div key={room} className="room-block">
+                          <label className="custom-radio left-half-label">
+                            <input
+                              value={`${room}.`}
+                              type="radio"
+                              name="option"
+                              onChange={(e) => setSelectedRoom(e.target.value)}
+                              disabled={occupiedRooms.includes(`${room}.`)} // Disable if occupied
+                            />
+                            <span
+                              className="half-room left-half"
+                              style={{
+                                backgroundColor: occupiedRooms.includes(
+                                  `${room}.`
+                                )
+                                  ? "red"
+                                  : "", // Color red if occupied
+                              }}
+                              id={`${room}.`}
+                            >
+                              <p className="room-number">{room}</p>
+                            </span>
+                          </label>
+                          <label className="custom-radio right-half-label">
+                            <input
+                              value={`${room}:`}
+                              type="radio"
+                              name="option"
+                              onChange={(e) => setSelectedRoom(e.target.value)}
+                              disabled={occupiedRooms.includes(`${room}:`)} // Disable if occupied
+                            />
+                            <span
+                              className="half-room right-half"
+                              style={{
+                                backgroundColor: occupiedRooms.includes(
+                                  `${room}:`
+                                )
+                                  ? "red"
+                                  : "", // Color red if occupied
+                              }}
+                              id={`${room}:`}
+                            >
+                              <p className="room-number">{room}</p>
+                            </span>
+                          </label>
+                        </div>
                       ))}
                     </div>
                   </div>
