@@ -3,7 +3,8 @@ import "./ConfirmRoom.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
+// Access the base URL from the environment variables
+const baseURL = import.meta.env.VITE_BASE_URL;
 
 function ConfirmRoom(data) {
   const navigate = useNavigate();
