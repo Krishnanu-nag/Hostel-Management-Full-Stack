@@ -33,6 +33,7 @@ function ConfirmRoom(data) {
           localStorage.setItem("selectedRoom", selectedRoom);
         } else {
           alert('Room is already allocated to someone else. Please choose a new room.');
+          window.location.reload();
           setButtonText('Submit');
           setIsButtonDisabled(false);
         }
