@@ -69,7 +69,7 @@ app.post('/aquamarine-room-page', async (req, res) => {
     // Check if the room is already allocated to this student
     const existingAllocation = await AllocatedRoomModel.findOne({ studentId });
     if (existingAllocation) {
-      return res.json('AllocationFailed'); // Room already allocated to this student
+      return res.json('AllocationExists'); // Room already allocated to this student
     }
 
     // Check if the room is already allocated to someone else

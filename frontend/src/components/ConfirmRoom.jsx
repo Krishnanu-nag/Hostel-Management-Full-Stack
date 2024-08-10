@@ -8,14 +8,14 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 
 function ConfirmRoom(data) {
   const navigate = useNavigate();
-  const [buttonText, setButtonText] = useState('Submit');
+  const [buttonText, setButtonText] = useState("Submit");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const confirmSubmit = async (e) => {
     e.preventDefault();
-    setButtonText('Submitting...');
+    setButtonText("Submitting...");
     setIsButtonDisabled(true);
-  
+
     if (studentId !== "Admin") {
       try {
         const result = await axios.post(`${baseURL}/aquamarine-room-page`, {
@@ -24,32 +24,46 @@ function ConfirmRoom(data) {
           selectedRoom,
           studentId,
         });
-  
+
         if (result.data === "AllocationSuccess") {
-          alert(`Success! Your allotted room is ${data.block}/${data.floor}/${data.room}`);
+          alert(
+            `Success! Your allotted room is ${data.block}/${data.floor}/${data.room}`
+          );
           navigate("/room-booked-page");
           localStorage.setItem("selectedBlock", selectedBlock);
           localStorage.setItem("selectedFloor", selectedFloor);
           localStorage.setItem("selectedRoom", selectedRoom);
-        } else {
-          alert('Room is already allocated to someone else. Please choose a new room.');
-          setButtonText('Submit');
+        } else if (result.data === "AllocationExists") {
+          alert("Room already allocated to this student");
+          navigate("/room-booked-page");
+        } else if (result.data === "RoomAlreadyAllocated") {
+          alert(
+            "Room is already allocated to someone else. Please choose a new room."
+          );
+          setButtonText("Submit");
           setIsButtonDisabled(false);
           window.location.reload();
+        } else {
+          alert("Unknown Error Occured");
         }
       } catch (err) {
         console.error("Network issue:", err);
-        setButtonText('Submit');
+        setButtonText("Submit");
         setIsButtonDisabled(false);
       }
     } else {
-      alert(`Success! ${localStorage.getItem("studentId")} your allotted room is ${data.block}/${data.floor}/${data.room}. Since you are a Guest, the allocated room will not be registered in the database.`);
+      alert(
+        `Success! ${localStorage.getItem("studentId")} your allotted room is ${
+          data.block
+        }/${data.floor}/${
+          data.room
+        }. Since you are a Guest, the allocated room will not be registered in the database.`
+      );
       navigate("/thanks-page");
-      setButtonText('Submit');
+      setButtonText("Submit");
       setIsButtonDisabled(false);
     }
   };
-  
 
   const selectedBlock = data.block;
   const selectedFloor = data.floor;
@@ -58,9 +72,9 @@ function ConfirmRoom(data) {
   const [isAgreed, setIsAgreed] = useState(false);
 
   return (
-    <> 
-       <br/>
-       <br/>
+    <>
+      <br />
+      <br />
       <div className="confirmRoom">
         <div className="container" id="block">
           <h1>{data.block}</h1>
