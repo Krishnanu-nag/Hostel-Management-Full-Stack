@@ -59,25 +59,45 @@ app.post('/login-page', async (req, res) => {
 
 app.post('/aquamarine-room-page', async (req, res) => {
   const { selectedBlock, selectedFloor, selectedRoom, studentId } = req.body;
+
   try {
-    const user = await AllocatedRoomModel.findOne({ studentId });
-    if (!user) {
-      const data = {
-        selectedBlock,
-        selectedFloor,
-        selectedRoom,
-        studentId,
-      };
-      await AllocatedRoomModel.insertMany([data]);
-      res.json('AllocationSuccess');
-    } else {
-      res.json('AllocationFailed');
+    // Validate input data
+    if (!selectedBlock || !selectedFloor || !selectedRoom || !studentId) {
+      return res.status(400).json({ error: 'Missing required fields' });
     }
+
+    // Check if the room is already allocated to this student
+    const existingAllocation = await AllocatedRoomModel.findOne({ studentId });
+    if (existingAllocation) {
+      return res.json('AllocationFailed'); // Room already allocated to this student
+    }
+
+    // Check if the room is already allocated to someone else
+    const roomAllocated = await AllocatedRoomModel.findOne({
+      selectedBlock,
+      selectedFloor,
+      selectedRoom,
+    });
+    if (roomAllocated) {
+      return res.json('RoomAlreadyAllocated'); // Room is taken by another student
+    }
+
+    // Proceed with the allocation if the room is available
+    const newAllocation = new AllocatedRoomModel({
+      selectedBlock,
+      selectedFloor,
+      selectedRoom,
+      studentId,
+    });
+    await newAllocation.save();
+    
+    res.json('AllocationSuccess'); // Successfully allocated the room
   } catch (error) {
-    console.error('Error in room allocation:', error);
-    res.status(500).send('Internal Server Error');
+    console.error('Error in room allocation:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 app.post('/aquamarine-room-page-check-alloted', async (req, res) => {
   const { studentId } = req.body;

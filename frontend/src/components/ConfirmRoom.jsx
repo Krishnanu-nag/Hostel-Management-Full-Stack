@@ -3,8 +3,7 @@ import "./ConfirmRoom.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// Access the base URL from the environment variables
-const baseURL = import.meta.env.VITE_BASE_URL;
+
 
 function ConfirmRoom(data) {
   const navigate = useNavigate();
@@ -13,39 +12,42 @@ function ConfirmRoom(data) {
 
   const confirmSubmit = async (e) => {
     e.preventDefault();
-    setButtonText('Submiting...');
+    setButtonText('Submitting...');
     setIsButtonDisabled(true);
-
+  
     if (studentId !== "Admin") {
-      await axios
-        .post(`${baseURL}/aquamarine-room-page`, {
+      try {
+        const result = await axios.post(`${baseURL}/aquamarine-room-page`, {
           selectedBlock,
           selectedFloor,
           selectedRoom,
           studentId,
-        })
-        .then((result) => {
-          if (result.data === "AllocationSuccess") {
-            alert(`Success your allotted room is ${data.block}/${data.floor}/${data.room}`);
-            navigate("/room-booked-page");
-            localStorage.setItem("selectedBlock", selectedBlock);
-            localStorage.setItem("selectedFloor", selectedFloor);
-            localStorage.setItem("selectedRoom", selectedRoom);
-          }
-          else alert(`Already Room Allocated`);
-          navigate("/room-booked-page")
-        })
-        .catch((err) => {
-          console.log("Network issue");
-          console.log(err.response.data);
-        })
+        });
+  
+        if (result.data === "AllocationSuccess") {
+          alert(`Success! Your allotted room is ${data.block}/${data.floor}/${data.room}`);
+          navigate("/room-booked-page");
+          localStorage.setItem("selectedBlock", selectedBlock);
+          localStorage.setItem("selectedFloor", selectedFloor);
+          localStorage.setItem("selectedRoom", selectedRoom);
+        } else {
+          alert('Room is already allocated to someone else. Please choose a new room.');
+          setButtonText('Submit');
+          setIsButtonDisabled(false);
+        }
+      } catch (err) {
+        console.error("Network issue:", err);
+        setButtonText('Submit');
+        setIsButtonDisabled(false);
+      }
     } else {
-      alert(`Success !! ${localStorage.getItem("studentId")} your allotted room is ${data.block}/${data.floor}/${data.room} . Since you are a Guest,Allocated room will not be registered in the database !!`);
+      alert(`Success! ${localStorage.getItem("studentId")} your allotted room is ${data.block}/${data.floor}/${data.room}. Since you are a Guest, the allocated room will not be registered in the database.`);
       navigate("/thanks-page");
       setButtonText('Submit');
       setIsButtonDisabled(false);
     }
   };
+  
 
   const selectedBlock = data.block;
   const selectedFloor = data.floor;
