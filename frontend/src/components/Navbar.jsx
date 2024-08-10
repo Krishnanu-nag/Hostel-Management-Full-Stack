@@ -1,70 +1,165 @@
 import "./Navbar.css";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+
 function Navbar() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   function logOut() {
-    localStorage.removeItem("studentId")
-    localStorage.removeItem("password")
-    navigate("/login-page")
+    localStorage.removeItem("studentId");
+    localStorage.removeItem("password");
+    navigate("/login-page");
   }
+
   return (
     <>
       <header>
         <div className="logobar">
           <Link to="/home-page">
-            <img className="logo" src="./logo.png" />
+            <img className="logo" src="./logo.png" alt="Logo" />
           </Link>
         </div>
         <div className="navbar">
           <NavLink to="/home-page">
             <span className="dropdown">
-              <button id="home-btn" className="dropbtn">
+              <a id="home-btn" className="dropbtn">
                 Home◽
-              </button>
+              </a>
+            </span>
+          </NavLink>
+          <NavLink to="/find-room-page">
+            <span className="dropdown">
+              <a id="search-room-btn" className="dropbtn">
+                Search Room◽
+              </a>
             </span>
           </NavLink>
           <span className="dropdown">
-            <button className="dropbtn">Boys Hostel◽ </button>
+            <a className="dropbtn">Hostels◽</a>
             <div className="dropdown-content">
-              <Link to="/aquamarine-page" id="aquamarine">
-                Aquamrine
-              </Link>
-              <Link to="/aquamarine-page" id="Jasper">
-                Jasper
-              </Link>
-              <Link to="/aquamarine-page" id="Amber">
-                Amber
-              </Link>
+              <span className="dropdown">
+                <a className="sub-dropbtn" style={{backgroundColor: "#b11e1e", cursor: "default" }}>
+                  Boys Hostel
+                </a>
+                <div className="sub-dropdown-content">
+                  <Link to="/aquamarine-page" id="aquamarine">
+                    Aquamarine
+                  </Link>
+                  <Link to="/aquamarine-page" id="Jasper">
+                    Jasper
+                  </Link>
+                  <Link to="/aquamarine-page" id="Amber">
+                    Amber
+                  </Link>
+                </div>
+              </span>
+              <span className="dropdown">
+                <a className="sub-dropbtn" style={{ backgroundColor: "#b11e1e", cursor: "default" }}>
+                  Girls Hostel
+                </a>
+                <div className="sub-dropdown-content">
+                  <Link to="/aquamarine-page" id="ruby">
+                    Ruby
+                  </Link>
+                  <Link to="/aquamarine-page" id="newRosaline">
+                    New Rosaline
+                  </Link>
+                  <Link to="/aquamarine-page" id="oldRosaline">
+                    Old Rosaline
+                  </Link>
+                </div>
+              </span>
             </div>
           </span>
           <span className="dropdown">
-            <button className="dropbtn">Girls Hostel◽ </button>
-            <div className="dropdown-content">
-              <Link to="/aquamarine-page" id="ruby">
-                Ruby
-              </Link>
-              <Link to="/aquamarine-page" id="newRosaline">
-                New Rosaline
-              </Link>
-              <Link to="/aquamarine-page" id="oldRosaline">
-                Old Rosaline
-              </Link>
-            </div>
-          </span>
-          <span className="dropdown">
-            <button className="dropbtn">{localStorage.getItem("studentId")}◽</button>
+            <a className="dropbtn">
+              {localStorage.getItem("studentId")}◽
+            </a>
             <span className="dropdown-content">
               <a onClick={logOut} id="home-btn" className="dropbtn">
                 LogOut
               </a>
             </span>
           </span>
-
-
         </div>
-        <div className="copyright"><p> Developed by Krishnanu Nag &nbsp;22JE0500  </p></div>
+        <div className="copyright">
+          <p>Developed by Krishnanu Nag &nbsp;22JE0500</p>
+        </div>
       </header>
     </>
   );
 }
+
 export default Navbar;
+
+
+
+// import "./Navbar.css";
+// import { Link, NavLink, useNavigate } from "react-router-dom";
+// function Navbar() {
+//   const navigate = useNavigate()
+//   function logOut() {
+//     localStorage.removeItem("studentId")
+//     localStorage.removeItem("password")
+//     navigate("/login-page")
+//   }
+//   return (
+//     <>
+//       <header>
+//         <div className="logobar">
+//           <Link to="/home-page">
+//             <img className="logo" src="./logo.png" />
+//           </Link>
+//         </div>
+//         <div className="navbar">
+//           <NavLink to="/home-page">
+//             <span className="dropdown">
+//               <button id="home-btn" className="dropbtn">
+//                 Home◽
+//               </button>
+//             </span>
+//           </NavLink>
+//           <span className="dropdown">
+//             <button className="dropbtn">Boys Hostel◽ </button>
+//             <div className="dropdown-content">
+//               <Link to="/aquamarine-page" id="aquamarine">
+//                 Aquamrine
+//               </Link>
+//               <Link to="/aquamarine-page" id="Jasper">
+//                 Jasper
+//               </Link>
+//               <Link to="/aquamarine-page" id="Amber">
+//                 Amber
+//               </Link>
+//             </div>
+//           </span>
+//           <span className="dropdown">
+//             <button className="dropbtn">Girls Hostel◽ </button>
+//             <div className="dropdown-content">
+//               <Link to="/aquamarine-page" id="ruby">
+//                 Ruby
+//               </Link>
+//               <Link to="/aquamarine-page" id="newRosaline">
+//                 New Rosaline
+//               </Link>
+//               <Link to="/aquamarine-page" id="oldRosaline">
+//                 Old Rosaline
+//               </Link>
+//             </div>
+//           </span>
+//           <span className="dropdown">
+//             <button className="dropbtn">{localStorage.getItem("studentId")}◽</button>
+//             <span className="dropdown-content">
+//               <a onClick={logOut} id="home-btn" className="dropbtn">
+//                 LogOut
+//               </a>
+//             </span>
+//           </span>
+
+
+//         </div>
+//         <div className="copyright"><p> Developed by Krishnanu Nag &nbsp;22JE0500  </p></div>
+//       </header>
+//     </>
+//   );
+// }
+// export default Navbar;

@@ -2,7 +2,7 @@
 header {
   position: sticky;
   top: 0;
-  z-index: 2;
+  z-index: 5;
   /* Ensure it stays on top */
 }
 
@@ -28,12 +28,13 @@ header {
   background-color: #ffffff;
   color: #000000;
   width: 100vw;
-  height: 41px;
+  height: 28px;
   display: flex;
   align-items: center; /* Center vertically */
   gap: 10px; /* Add space between items */
   z-index: 5;
   position: relative;
+
 }
 
 /* Dropdown button styling */
@@ -57,7 +58,7 @@ header {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
+  min-width: 100px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
@@ -87,3 +88,5 @@ header {
   color: #f1f1f1;
   border-radius: 0%; /* Remove rounded corners */
 }
+
+

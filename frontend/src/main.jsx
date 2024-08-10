@@ -14,6 +14,7 @@ import RegisterPage from './pages/RegisterPage.jsx';
 import RoomBooked from './components/RoomBooked.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 import ThanksPage from './pages/ThanksPage.jsx';
+import FindRoomPage from './pages/FindRoomPage.jsx';
 
 
 
@@ -50,6 +51,10 @@ const router=createBrowserRouter([    //array of objects
   {
     path:"/thanks-page",
     element:<ThanksPage/>
+  },
+  {
+    path:"/find-room-page",
+    element:<FindRoomPage/>
   },
   {
     path:"*",
