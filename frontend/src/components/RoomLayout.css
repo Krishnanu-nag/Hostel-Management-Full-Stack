@@ -1,3 +1,4 @@
+
 #aquamarineRoomLayout {
     text-align: center;
     margin: 0 30px;
@@ -5,40 +6,83 @@
 }
 
 #aquamarineRoomSelect {
-    text-align: center;
-    max-width: 330px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     background-color: rgb(58, 57, 56);
     padding: 20px;
     margin: auto;
     height: auto;
-    position: relative; /* Add this */
+    max-width: 330px;
+    position: relative;
+}
+
+.room-block {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
 }
 
 .custom-radio input[type="radio"] {
     display: none;
 }
 
-/* Create a custom checkmark */
-.custom-radio .checkmark {
-    margin: 0 5px;
-    display: inline-block;
-    width: 15%;
-    height: 5em;
+.custom-radio .half-room {
+    width: 45px;
+    height: 3em;
     border: 1px solid #ffffff;
     position: relative;
-    vertical-align: middle;
     color: rgb(255, 255, 255);
     background-color: rgb(19, 180, 19);
-    margin-bottom: 20px;
-    z-index: 1; /* Adjust z-index */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-align: center;
+    margin: 2px;
 }
 
-/* When the radio button is checked, change the content */
-.custom-radio input[type="radio"]:checked + .checkmark {
+/* Add extra margin to even-numbered rooms */
+.room-block:nth-child(even) {
+    margin-left: 50px; /* Adjust the value for the desired gap */
+}
+
+.room-number {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1em;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.half-label {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.left-half {
+    background-color: rgb(19, 180, 19);
+}
+
+.right-half {
+    background-color: rgb(19, 180, 19);
+}
+
+.custom-radio input[value$="."]:checked + .half-room.left-half {
     background-color: blueviolet;
 }
 
-.checkmark:hover {
-    cursor: pointer;
+.custom-radio input[value$=":"]:checked + .half-room.right-half {
+    background-color: blueviolet;
+}
+
+.custom-radio .half-room:hover {
     background-color: #2f4c30;
 }

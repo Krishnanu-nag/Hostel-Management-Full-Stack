@@ -35,6 +35,7 @@ function ConfirmRoom(data) {
           alert('Room is already allocated to someone else. Please choose a new room.');
           setButtonText('Submit');
           setIsButtonDisabled(false);
+          window.location.reload();
         }
       } catch (err) {
         console.error("Network issue:", err);
