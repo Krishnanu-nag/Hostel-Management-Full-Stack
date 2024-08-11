@@ -1,8 +1,10 @@
 import "./Navbar.css";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Navbar() {
   const navigate = useNavigate();
+  const [navSignIn,setNavSignIn]=useState("Sign In")
 
   function logOut() {
     localStorage.removeItem("studentId");
@@ -15,7 +17,7 @@ function Navbar() {
       <header>
         <div className="logobar">
           <Link to="/home-page">
-            <img className="logo" src="./logo.png" alt="Logo" />
+            <img className="logo" src="../public/logo.png" alt="Logo" />
           </Link>
         </div>
         <div className="navbar">
@@ -72,7 +74,7 @@ function Navbar() {
           </span>
           <span className="dropdown">
             <a className="dropbtn">
-              {localStorage.getItem("studentId")}◽
+              {!localStorage.getItem("studentId")? navSignIn:localStorage.getItem("studentId")}◽
             </a>
             <span className="dropdown-content">
               <a onClick={logOut} id="home-btn" className="dropbtn">

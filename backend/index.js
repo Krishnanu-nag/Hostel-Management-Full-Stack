@@ -68,7 +68,7 @@ app.post('/send-otp', async (req, res) => {
       from: process.env.EMAIL,
       to: email,
       subject: 'OTP for Registration ',
-      text: `Hello ${studentId} ,your OTP for registration is: ${otpdb} and is valid for the next 2 mins.Hurry Up.`
+      text: `${wish} ${studentId}\n\n,Thanks for Registering \n\n Here is your OTP for registration : ${otpdb}\nIt is valid for the next 2 mins so hurry up and get yourself registered !!.`
     };
 
     transporter.sendMail(mailOptions, function(error, info){
@@ -96,9 +96,7 @@ app.post('/verify-otp', async (req, res) => {
     const storedOtp = await OtpStoreModel.findOne({ studentId });
 
     if (storedOtp && otp == storedOtp.otp) {
-      // Check if the user already exists
-      const user = await credentialModel.findOne({ studentId });
-      if (!user) {
+     {
         // Register the new user
         const newUser = new credentialModel({
           studentId,
@@ -110,10 +108,9 @@ app.post('/verify-otp', async (req, res) => {
         await OtpStoreModel.deleteOne({ studentId });
 
         res.json('OtpVerified');
-      } else {
-        res.json('ExistingUser');
-      }
-    } else {
+      } 
+    } 
+    else {
       res.json('InvalidOtp');
     }
   } catch (error) {
@@ -121,6 +118,21 @@ app.post('/verify-otp', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+
+//wish user depending on at which time they interact with our server
+function getWish() {
+  const currentHour = new Date().getHours();
+  if (currentHour < 12) {
+    return "Good Morning";
+  } else if (currentHour < 18) {
+    return "Good Afternoon";
+  } else {
+    return "Good Evening";
+  }
+}
+const wish=getWish()
+
 
 // Forgot Password Route
 app.post('/forgot-password', async (req, res) => {
@@ -145,7 +157,7 @@ app.post('/forgot-password', async (req, res) => {
         from: process.env.EMAIL,
         to: email,
         subject: `Password for ${studentId}`,
-        text: ` Hello ${studentId} , your password is: ${user.password}`
+        text: `${wish} ${studentId},\n\nSince you have forgotten your password , I am here to help you out.\n\nYour password is : ${user.password}`
       };
 
       transporter.sendMail(mailOptions, function(error, info) {

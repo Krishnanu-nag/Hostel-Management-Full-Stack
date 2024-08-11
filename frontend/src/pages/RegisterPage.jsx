@@ -63,7 +63,8 @@ function RegisterPage() {
         if (verifyResult.data === "OtpVerified") {
           alert("Successfully registered! Redirecting to login.");
           navigate("/login-page");
-        } else if (verifyResult.data === "InvalidOtp") {
+        }else if(verifyResult.data === "OtpExpired"){}
+        else if (verifyResult.data === "InvalidOtp") {
           alert("Invalid OTP. Please try again.");
         } else if (verifyResult.data === "ExistingUser") {
           alert("User already exists! Redirecting to login.");
@@ -88,8 +89,8 @@ function RegisterPage() {
   };
 
   const guestLogin = () => {
-    localStorage.setItem("studentId", "Admin");
-    localStorage.setItem("password", "guest1234");
+    localStorage.setItem("studentId", "Guest");
+    
   };
 
   return (
@@ -138,3 +139,4 @@ function RegisterPage() {
 }
 
 export default RegisterPage;
+

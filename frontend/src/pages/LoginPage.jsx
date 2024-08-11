@@ -17,15 +17,11 @@ function LoginPage() {
   // Clear local storage if it's not a new login attempt
   if (!newLogin) {
     localStorage.removeItem("studentId");
-    localStorage.removeItem("password");
-    localStorage.removeItem("selectedBlock");
-    localStorage.removeItem("selectedFloor");
-    localStorage.removeItem("selectedRoom");
   }
 
   const guestLogin = () => {
-    localStorage.setItem("studentId", "Admin");
-    localStorage.setItem("password", "guest1234");
+    localStorage.setItem("studentId", "Guest");
+    // localStorage.setItem("password", "guest1234");
   };
 
   const togglePassword = () => {
@@ -39,8 +35,8 @@ function LoginPage() {
       setIsButtonDisabled(true);
 
       setNewLogin(true);  // Old account details get deleted and new ones get stored
-      localStorage.setItem('studentId', studentId);
-      localStorage.setItem('password', password);
+
+      // localStorage.setItem('password', password);
 
       try {
         const result = await axios.post(`${baseURL}/login-page`, {
@@ -50,6 +46,7 @@ function LoginPage() {
 
         if (result.data === "Success") {
           alert(`Welcome ${studentId}`);
+          localStorage.setItem('studentId', studentId);
           navigate("/home-page");
         } else if (result.data === "Failed") {
           alert("Invalid Password");

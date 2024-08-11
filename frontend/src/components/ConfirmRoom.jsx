@@ -16,7 +16,7 @@ function ConfirmRoom(data) {
     setButtonText("Submitting...");
     setIsButtonDisabled(true);
 
-    if (studentId !== "Admin") {
+    if (studentId !== "Guest") {
       try {
         const result = await axios.post(`${baseURL}/aquamarine-room-page`, {
           selectedBlock,
@@ -30,9 +30,6 @@ function ConfirmRoom(data) {
             `Success! Your allotted room is ${data.block}/${data.floor}/${data.room}`
           );
           navigate("/room-booked-page");
-          localStorage.setItem("selectedBlock", selectedBlock);
-          localStorage.setItem("selectedFloor", selectedFloor);
-          localStorage.setItem("selectedRoom", selectedRoom);
         } else if (result.data === "AllocationExists") {
           alert("Room already allocated to this student");
           navigate("/room-booked-page");

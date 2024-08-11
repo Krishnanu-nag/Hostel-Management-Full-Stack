@@ -12,22 +12,26 @@ function AquamarinePage() {
   const [buttonText, setButtonText] = useState("Proceed to book your room");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  async function isAlloted() {
+  async function checkStudent() {
     const studentId = localStorage.getItem("studentId"); // Retrieve studentId from localStorage
-
+  
     setButtonText("Checking...");
     setIsButtonDisabled(true);
-    if (studentId == "Admin") navigate("/aquamarine-room-page");
-    else {
+  
+    if (studentId === "Guest") {
+      navigate("/aquamarine-room-page");
+    } else if (!studentId) {
+      navigate("/login-page");
+    } else {
       try {
         const result = await axios.post(
-          `${baseURL}/aquamarine-room-page-check-alloted?`,
+          `${baseURL}/aquamarine-room-page-check-alloted`,
           { studentId }
         );
-
+  
         if (result.data === "AlreadyAlloted") {
           alert(`${studentId} has already been allotted a room`);
-          navigate("/home-page");
+          navigate("/room-booked-page");
         } else {
           navigate("/aquamarine-room-page");
         }
@@ -36,7 +40,7 @@ function AquamarinePage() {
       }
     }
   }
-
+  
   return (
     <MainLayout>
       <img id="aqua-img" src="/aquamarine.jpeg" alt="Aquamarine Hostel" />{" "}
@@ -44,7 +48,7 @@ function AquamarinePage() {
       <div id="aquamarinePage">
         <h1>Aquamarine Hostel</h1>
         <div id="aquaBookRoom">
-          <button onClick={isAlloted} disabled={isButtonDisabled}>
+          <button onClick={checkStudent} disabled={isButtonDisabled}>
             {buttonText}
           </button>
         </div>

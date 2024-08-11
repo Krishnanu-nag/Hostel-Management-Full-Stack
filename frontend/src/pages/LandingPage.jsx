@@ -13,10 +13,6 @@ function LandingPage() {
 
   (function (){
     localStorage.removeItem("studentId");            
-    localStorage.removeItem("password");
-    localStorage.removeItem("selectedBlock");
-    localStorage.removeItem("selectedFloor");
-    localStorage.removeItem("selectedRoom");
   })();
 
   return (
