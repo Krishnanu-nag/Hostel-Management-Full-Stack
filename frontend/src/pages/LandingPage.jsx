@@ -20,8 +20,17 @@ function LandingPage() {
       <div className="centerdiv" id="landingPage">
         <img src="./ismlogo.jpg" />
         <p className="title">IIT ISM Hostel Management Portal</p>
+        <Link to ="/home-page">
+        <button
+            className="login_btn"
+            onMouseEnter={colorchangeEnter}
+            onMouseLeave={() => {
+              colorchangeOut();
+            }}
+          >
+            Proceed to Home Page
+          </button></Link><br/><br/>
         <Link to="/register-page">
-          {" "}
           <button
             className="login_btn"
             onMouseEnter={colorchangeEnter}
@@ -29,8 +38,9 @@ function LandingPage() {
               colorchangeOut();
             }}
           >
-            Proceed to Log In{" "}
+            Proceed to Log In
           </button>
+          
         </Link>
       </div>
     </>
