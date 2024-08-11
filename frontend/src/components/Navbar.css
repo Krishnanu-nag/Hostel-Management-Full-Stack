@@ -28,7 +28,7 @@ header {
   background-color: #ffffff;
   color: #000000;
   width: 100vw;
-  height: 28px;
+  height: 33px;
   display: flex;
   align-items: center; /* Center vertically */
   gap: 10px; /* Add space between items */
@@ -41,8 +41,8 @@ header {
 .dropbtn {
   background-color: transparent;
   color: rgb(0, 0, 0);
-  padding: 5px;
-  font-size: 15px;
+  padding: 2px;
+  font-size: 17px;
   border: none;
   cursor: pointer; /* Show pointer cursor on hover */
 }
@@ -69,6 +69,7 @@ header {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  margin-top: 5px;
 }
 
 /* Hover effect for dropdown links */
