@@ -17,7 +17,7 @@ function Navbar() {
       <header>
         <div className="logobar">
           <Link to="/home-page">
-            <img className="logo" src="../public/logo.png" alt="Logo" />
+            <img className="logo" src="/logo.png" alt="Logo" />
           </Link>
         </div>
         <div className="navbar">
