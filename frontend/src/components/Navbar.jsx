@@ -4,13 +4,21 @@ import { useState } from "react";
 
 function Navbar() {
   const navigate = useNavigate();
-  const [navSignIn,setNavSignIn]=useState("Sign In")
+  const [navSignIn, setNavSignIn] = useState("Sign In");
 
   function logOut() {
     localStorage.removeItem("studentId");
     localStorage.removeItem("password");
     navigate("/login-page");
   }
+
+  const studentId = localStorage.getItem("studentId");
+
+  const handleSignInClick = () => {
+    if (!studentId) {
+      navigate("/login-page");
+    }
+  };
 
   return (
     <>
@@ -39,7 +47,7 @@ function Navbar() {
             <a className="dropbtn">Hostels◽</a>
             <div className="dropdown-content">
               <span className="dropdown">
-                <a className="sub-dropbtn" style={{backgroundColor: "#b11e1e", cursor: "default" }}>
+                <a className="sub-dropbtn" style={{ backgroundColor: "#b11e1e", cursor: "default" }}>
                   Boys Hostel
                 </a>
                 <div className="sub-dropdown-content">
@@ -73,14 +81,16 @@ function Navbar() {
             </div>
           </span>
           <span className="dropdown">
-            <a className="dropbtn">
-              {!localStorage.getItem("studentId")? navSignIn:localStorage.getItem("studentId")}◽
+            <a className="dropbtn" onClick={handleSignInClick}>
+              {studentId ? studentId : navSignIn}◽
             </a>
-            <span className="dropdown-content">
-              <a onClick={logOut} id="home-btn" className="dropbtn">
-                LogOut
-              </a>
-            </span>
+            {studentId && (
+              <div className="dropdown-content">
+                <a onClick={logOut} id="home-btn" className="dropbtn">
+                  LogOut
+                </a>
+              </div>
+            )}
           </span>
         </div>
         <div className="copyright">
