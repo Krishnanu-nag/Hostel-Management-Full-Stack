@@ -4,11 +4,10 @@ import { useState } from "react";
 
 function Navbar() {
   const navigate = useNavigate();
-  const [navSignIn, setNavSignIn] = useState("Sign In");
+
 
   function logOut() {
     localStorage.removeItem("studentId");
-    localStorage.removeItem("password");
     navigate("/login-page");
   }
 
@@ -82,7 +81,7 @@ function Navbar() {
           </span>
           <span className="dropdown">
             <a className="dropbtn" onClick={handleSignInClick}>
-              {studentId ? studentId : navSignIn}◽
+              {studentId ? studentId : "SignIn"}◽
             </a>
             {studentId && (
               <div className="dropdown-content">
