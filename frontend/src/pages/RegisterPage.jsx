@@ -5,6 +5,7 @@ import axios from "axios";
 function RegisterPage() {
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // State for confirm password
   const [otp, setOtp] = useState("");  // State for OTP
   const [isOtpSent, setIsOtpSent] = useState(false);  // State to track OTP sending status
   const [buttonText, setButtonText] = useState('Register');
@@ -14,7 +15,11 @@ function RegisterPage() {
 
   const checkAndSendOtp = async (e) => {
     e.preventDefault();
-    if (studentId && password) {
+    if (studentId && password && confirmPassword) {
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
       setButtonText('Wait...');
       setIsButtonDisabled(true);
 
@@ -31,7 +36,7 @@ function RegisterPage() {
 
           if (otpSendResult.data === "OtpSent") {
             setIsOtpSent(true);  // OTP sent, proceed to OTP verification
-            alert(`OTP sent to ${studentId}@iitism.ac.in ! Please check your email.`);
+            alert(`OTP sent to ${studentId}@iitism.ac.in! Please check your email.`);
           } else {
             alert("Failed to send OTP. Please try again.");
           }
@@ -44,7 +49,7 @@ function RegisterPage() {
         setIsButtonDisabled(false);
       }
     } else {
-      alert("Please enter both Student ID and Password.");
+      alert("Please enter Student ID, Password, and Confirm Password.");
     }
   };
 
@@ -63,7 +68,7 @@ function RegisterPage() {
         if (verifyResult.data === "OtpVerified") {
           alert("Successfully registered! Redirecting to login.");
           navigate("/login-page");
-        }else if(verifyResult.data === "OtpExpired"){}
+        } 
         else if (verifyResult.data === "InvalidOtp") {
           alert("Invalid OTP. Please try again.");
         } else if (verifyResult.data === "ExistingUser") {
@@ -90,7 +95,6 @@ function RegisterPage() {
 
   const guestLogin = () => {
     localStorage.setItem("studentId", "Guest");
-    
   };
 
   return (
@@ -103,17 +107,30 @@ function RegisterPage() {
           placeholder="Student ID: 22JEXXXX"
           value={studentId}
           onChange={(e) => setStudentId(e.target.value.toUpperCase())}
+          disabled={isOtpSent}  // Disable editing if OTP is sent
         /><br /><br />
-        <input
-          className="password"
-          type={showPassword ? "text" : "password"}
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        /><br />
-        <a className="passwordVisbility" type="button" onClick={togglePassword}>
-          {showPassword ? "Hide" : "Show"}
-        </a><br />
+        {!isOtpSent && (
+          <>
+            <input
+              className="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Set Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+              <br />
+            <input
+              className="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            /><br />
+            <a className="passwordVisbility" type="button" onClick={togglePassword}>
+              {showPassword ? "Hide" : "Show"}
+            </a><br />
+          </>
+        )}
         {!isOtpSent ? (
           <button type="submit" onClick={checkAndSendOtp} disabled={isButtonDisabled}>
             {buttonText}
@@ -139,4 +156,3 @@ function RegisterPage() {
 }
 
 export default RegisterPage;
-
