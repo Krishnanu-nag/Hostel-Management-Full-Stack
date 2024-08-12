@@ -42,7 +42,7 @@ function ForgotPasswordPage() {
 
   return (
     <div className="centerdiv" id="loginPage">
-      <h1>Get Passoword</h1>
+      <h1>Get Password</h1>
       <img src="./student-login.svg" alt="student logo" />
       <form className="loginForm">
         <input

@@ -38,12 +38,12 @@ function Navbar() {
           <NavLink to="/find-room-page">
             <span className="dropdown">
               <a id="search-room-btn" className="dropbtn">
-                Search Room◽
+                Find◽
               </a>
             </span>
           </NavLink>
           <span className="dropdown">
-            <a className="dropbtn">Hostels◽</a>
+            <a className="dropbtn">Book Hostel◽</a>
             <div className="dropdown-content">
               <span className="dropdown">
                 <a className="sub-dropbtn" style={{ backgroundColor: "#b11e1e", cursor: "default" }}>
