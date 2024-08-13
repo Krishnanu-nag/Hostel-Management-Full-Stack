@@ -165,7 +165,7 @@ function RegisterPage() {
               onChange={(e) => setOtp(e.target.value)}
             /><br /><br />
             <button type="button" onClick={verifyOtp} disabled={isButtonDisabled}>
-              Verify OTP
+              {buttonText}
             </button>
           </>
         )}
