@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 function RegisterPage() {
@@ -13,6 +13,14 @@ function RegisterPage() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
+  const [hasAlerted, setHasAlerted] = useState(false); 
+
+  useEffect(() => {
+    if (password !== "" && !hasAlerted) {
+      alert("Don't set your official password. Set something creative. I know you are good at it.");
+      setHasAlerted(true); // Set to true so the alert doesn't show again
+    }
+  }, [password, hasAlerted]);
 
   const checkAndSendOtp = async (e) => {
     localStorage.removeItem("studentId");
@@ -118,7 +126,7 @@ function RegisterPage() {
           type="text"
           placeholder="Enter Name"
           value={studentName}
-          onChange={(e) => setStudentName(e.target.value.trimStart())}
+          onChange={(e) => setStudentName((e.target.value.toUpperCase()).trimStart())}
           disabled={isOtpSent}  // Disable editing if OTP is sent
         /><br />
         {!isOtpSent && (
@@ -141,6 +149,7 @@ function RegisterPage() {
             <a className="passwordVisbility" type="button" onClick={togglePassword}>
               {showPassword ? "Hide" : "Show"}
             </a><br />
+            
           </>
         )}
         {!isOtpSent ? (
