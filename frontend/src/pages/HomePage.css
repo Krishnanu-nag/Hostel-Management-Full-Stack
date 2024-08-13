@@ -78,9 +78,6 @@ p strong {
     transition: color 0.3s ease;
 }
 
-p strong:hover {
-    color: #ffeb3b;
-}
 
 
 .heritageImage{
