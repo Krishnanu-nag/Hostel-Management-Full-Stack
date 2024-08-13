@@ -8,7 +8,7 @@ function RegisterPage() {
   const [confirmPassword, setConfirmPassword] = useState(""); // State for confirm password
   const [otp, setOtp] = useState("");  // State for OTP
   const [isOtpSent, setIsOtpSent] = useState(false);  // State to track OTP sending status
-  const [buttonText, setButtonText] = useState('Send OTP');
+  const [buttonText, setButtonText] = useState('Register');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
@@ -67,7 +67,7 @@ function RegisterPage() {
         });
 
         if (verifyResult.data === "OtpVerified") {
-          alert("Successfully registered! Redirecting to Home page.");
+          alert("Successfully registered!");
           localStorage.setItem('studentId', studentId);
           navigate("/home-page");
         } 

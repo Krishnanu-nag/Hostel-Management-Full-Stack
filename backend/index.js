@@ -249,7 +249,6 @@ app.post('/aquamarine-room-page', async (req, res) => {
 
     // Proceed with the allocation if the room is available
     const newAllocation = new AllocatedRoomModel({
-      Hostel:"Aquamarine",
       selectedBlock,
       selectedFloor,
       selectedRoom,
@@ -311,7 +310,6 @@ app.post('/find-student', async (req, res) => {
     if (allocation) {
       // Respond with the student's room information
       res.json({
-        hostel:allocation.Hostel,
         selectedBlock: allocation.selectedBlock,
         selectedFloor: allocation.selectedFloor,
         selectedRoom: allocation.selectedRoom,

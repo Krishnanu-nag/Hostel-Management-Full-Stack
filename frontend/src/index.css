@@ -62,7 +62,7 @@ button:hover{
 #loginPage{
   border: 2px solid #000000;
   border-radius: 20px;
-  padding: 2em 4em ;
+  padding: 5em ;
   min-width: 20vw;
 }
 #loginPage h1{
