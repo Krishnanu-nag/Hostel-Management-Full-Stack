@@ -30,7 +30,11 @@ function RegisterPage() {
         alert("Passwords do not match!");
         return;
       }
-      if(studentId[0]!="2" && studentId[1]!="2" || studentId[0]!="2" && studentId[1]!="3" ){alert("Currently only for 22JE and 23JE students.");return}
+      console.log(studentId[0],studentId[1])
+      if (!(studentId.startsWith("22") || studentId.startsWith("23"))) {
+        alert("Currently only for 22JE and 23JE students.");
+        return;
+      }
       setButtonText('Wait...');
       setIsButtonDisabled(true);
 
