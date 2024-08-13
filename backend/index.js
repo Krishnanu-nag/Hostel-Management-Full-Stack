@@ -104,7 +104,7 @@ app.post('/send-otp', async (req, res) => {
 
 // Verify OTP and register the user
 app.post('/verify-otp', async (req, res) => {
-  const { studentId, otp, password } = req.body;
+  const { studentId, otp, password,studentName } = req.body;
 
   try {
     // Retrieve the stored OTP from the database
@@ -114,6 +114,7 @@ app.post('/verify-otp', async (req, res) => {
      {
         // Register the new user
         const newUser = new credentialModel({
+          studentName,
           studentId,
           password
         });
@@ -183,25 +184,25 @@ app.post('/forgot-password', async (req, res) => {
 });
 
 
-app.post('/register-page', async (req, res) => {
-  const { password, studentId } = req.body;
-  try {
-    const user = await credentialModel.findOne({ studentId });
-    if (!user) {
-      const data = {
-        studentId,
-        password
-      };
-      await credentialModel.insertMany([data]);
-      res.json('RegistrationSuccess');
-    } else {
-      res.json('ExistingUser');
-    }
-  } catch (error) {
-    console.error('Error in registration:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
+// app.post('/register-page', async (req, res) => {
+//   const { password, studentId } = req.body;
+//   try {
+//     const user = await credentialModel.findOne({ studentId });
+//     if (!user) {
+//       const data = {
+//         studentId,
+//         password
+//       };
+//       await credentialModel.insertMany([data]);
+//       res.json('RegistrationSuccess');
+//     } else {
+//       res.json('ExistingUser');
+//     }
+//   } catch (error) {
+//     console.error('Error in registration:', error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// });
 
 app.post('/login-page', async (req, res) => {
   const { password, studentId } = req.body;

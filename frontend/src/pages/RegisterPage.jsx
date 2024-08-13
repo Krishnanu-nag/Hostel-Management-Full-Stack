@@ -4,6 +4,7 @@ import axios from "axios";
 
 function RegisterPage() {
   const [studentId, setStudentId] = useState("");
+  const [studentName, setStudentName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState(""); // State for confirm password
   const [otp, setOtp] = useState("");  // State for OTP
@@ -21,6 +22,7 @@ function RegisterPage() {
         alert("Passwords do not match!");
         return;
       }
+      if(studentId[0]!="2" && studentId[1]!="2" || studentId[0]!="2" && studentId[1]!="3" ){alert("Currently only for 22JE and 23JE students.");return}
       setButtonText('Wait...');
       setIsButtonDisabled(true);
 
@@ -61,6 +63,7 @@ function RegisterPage() {
 
       try {
         const verifyResult = await axios.post(`${baseURL}/verify-otp`, {
+          studentName,
           studentId,
           otp,
           password
@@ -108,9 +111,16 @@ function RegisterPage() {
           type="text"
           placeholder="Student ID: 22JEXXXX"
           value={studentId}
-          onChange={(e) => setStudentId(e.target.value.toUpperCase())}
+          onChange={(e) => setStudentId((e.target.value.toUpperCase()).trim())}
           disabled={isOtpSent}  // Disable editing if OTP is sent
-        /><br /><br />
+        /><br />
+        <input
+          type="text"
+          placeholder="Enter Name"
+          value={studentName}
+          onChange={(e) => setStudentName(e.target.value.trimStart())}
+          disabled={isOtpSent}  // Disable editing if OTP is sent
+        /><br />
         {!isOtpSent && (
           <>
             <input
@@ -118,7 +128,7 @@ function RegisterPage() {
               type={showPassword ? "text" : "password"}
               placeholder="Set Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword((e.target.value).trimStart())}
             />
               <br />
             <input
@@ -126,7 +136,7 @@ function RegisterPage() {
               type={showPassword ? "text" : "password"}
               placeholder="Confirm Password"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => setConfirmPassword((e.target.value).trimStart())}
             /><br />
             <a className="passwordVisbility" type="button" onClick={togglePassword}>
               {showPassword ? "Hide" : "Show"}

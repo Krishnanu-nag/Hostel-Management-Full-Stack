@@ -100,7 +100,7 @@ function AquamarineRoomPage() {
           <label>Selected</label>
           <br />
         </div>
-        <p className="accomodationInfo">** Each room is divided into two selecteable blocks for double accomodation.</p>
+        <p className="accomodationInfo">** Each room is divided into two selectable blocks for double accomodation.<br/>You and your Room-mate should choose the same room,either of the blocks. </p>
         <div className="form-container">
           <form action="">
             <label htmlFor="block">Choose Block : </label>

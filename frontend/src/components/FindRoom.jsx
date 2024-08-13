@@ -34,13 +34,13 @@ function FindStudent() {
 
   return (
     <div className="find-student-container">
-      <h2>Find Student Room </h2>
+      <h2>Find Student's Room </h2>
       <form >
         <input
           type="text"
           placeholder="Enter Student ID"
           value={studentId}
-          onChange={(e) => setStudentId(e.target.value.toUpperCase())}
+          onChange={(e) => setStudentId((e.target.value.toUpperCase()).trim())}
           required
         />
       </form><br/>

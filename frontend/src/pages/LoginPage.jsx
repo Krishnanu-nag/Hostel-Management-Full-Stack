@@ -76,7 +76,7 @@ function LoginPage() {
           type="text"
           placeholder="Student ID: 22JEXXXX"
           value={studentId}
-          onChange={(e) => setStudentId(e.target.value.toUpperCase())}
+          onChange={(e) => setStudentId((e.target.value.toUpperCase()).trim())}
         />
         <br /><br />
         <input
@@ -84,7 +84,7 @@ function LoginPage() {
           type={showPassword ? "text" : "password"}
           placeholder="Enter Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword((e.target.value).trimStart())}
         />
         <br />
         <a className="passwordVisbility" type="button" onClick={togglePassword}>

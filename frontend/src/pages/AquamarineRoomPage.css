@@ -7,6 +7,7 @@
    
 }
 
+
 #aquamarineRoomPage .form-container{
     text-align: center;
     padding: 20px;
@@ -17,10 +18,12 @@
 }
 
 #legend{
-    padding-top:10px;
-    width: 160px;
     margin: auto;
     line-height: 30%;
+    border: 2px solid white;
+    padding: 5px;
+    max-width: 250px;
+
 }
 .box{
     width: 30px;
@@ -43,4 +46,9 @@
 
 .accomodationInfo{
     margin: 20px 15vw;
+    border: 2px solid white;
+    padding: 5px;
+    max-width: 250px;
+    margin: auto;
+    margin-top:20px ;
 }
