@@ -43,7 +43,7 @@ function Navbar() {
             </span>
           </NavLink>
           <span className="dropdown">
-            <a className="dropbtn">Book Hostel◽</a>
+            <a className="dropbtn">Book Hostel ▼</a>
             <div className="dropdown-content">
               <span className="dropdown">
                 <a className="sub-dropbtn" style={{ backgroundColor: "#b11e1e", cursor: "default" }}>
@@ -81,7 +81,7 @@ function Navbar() {
           </span>
           <span className="dropdown">
             <a className="dropbtn" onClick={handleSignInClick}>
-              {studentId ? studentId : "SignIn"}◽
+              {studentId ? studentId : "SignIn"} ▼
             </a>
             {studentId && (
               <div className="dropdown-content">
