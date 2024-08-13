@@ -53,12 +53,12 @@ function Navbar() {
                   <Link to="/aquamarine-page" id="aquamarine">
                     Aquamarine
                   </Link>
-                  <Link to="/aquamarine-page" id="Jasper">
+                  {/* <Link to="/aquamarine-page" id="Jasper">
                     Jasper
                   </Link>
                   <Link to="/aquamarine-page" id="Amber">
                     Amber
-                  </Link>
+                  </Link> */}
                 </div>
               </span>
               <span className="dropdown">
@@ -66,14 +66,14 @@ function Navbar() {
                   Girls Hostel
                 </a>
                 <div className="sub-dropdown-content">
-                  <Link to="/aquamarine-page" id="ruby">
+                  {/* <Link to="/aquamarine-page" id="ruby">
                     Ruby
                   </Link>
                   <Link to="/aquamarine-page" id="newRosaline">
                     New Rosaline
-                  </Link>
+                  </Link> */}
                   <Link to="/aquamarine-page" id="oldRosaline">
-                    Old Rosaline
+                    Old Rosaline<br/>(Soon)
                   </Link>
                 </div>
               </span>
