@@ -42,15 +42,15 @@ app.post('/check-user', async (req, res) => {
 //wish user depending on at which time they interact with our server
 function getWish() {
   const currentHour = new Date().getHours();
-  if (currentHour < 12 && currentHour>3) {
+  
+  if (currentHour >= 4 && currentHour < 12) {
     return "Good Morning";
-  } else if (currentHour < 18 && currentHour>11) {
+  } else if (currentHour >= 12 && currentHour < 18) {
     return "Good Afternoon";
   } else {
     return "Good Evening";
   }
 }
-
 
 
 // Example usage
