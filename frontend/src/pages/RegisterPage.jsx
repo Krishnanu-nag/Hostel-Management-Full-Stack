@@ -14,6 +14,7 @@ function RegisterPage() {
   const baseURL = import.meta.env.VITE_BASE_URL;
 
   const checkAndSendOtp = async (e) => {
+    localStorage.removeItem("studentId");
     e.preventDefault();
     if (studentId && password && confirmPassword) {
       if (password !== confirmPassword) {
@@ -66,8 +67,9 @@ function RegisterPage() {
         });
 
         if (verifyResult.data === "OtpVerified") {
-          alert("Successfully registered! Redirecting to login.");
-          navigate("/login-page");
+          alert("Successfully registered! Redirecting to Home page.");
+          localStorage.setItem('studentId', studentId);
+          navigate("/home-page");
         } 
         else if (verifyResult.data === "InvalidOtp") {
           alert("Invalid OTP. Please try again.");
