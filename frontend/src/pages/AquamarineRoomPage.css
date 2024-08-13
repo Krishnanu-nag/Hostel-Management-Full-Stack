@@ -9,7 +9,7 @@
 
 #aquamarineRoomPage .form-container{
     text-align: center;
-    padding: 30px;
+    padding: 20px;
    
 }
 #aquamarineRoomPage select{
@@ -41,3 +41,6 @@
     bottom:17px
 }
 
+.accomodationInfo{
+    margin: 20px 15vw;
+}
