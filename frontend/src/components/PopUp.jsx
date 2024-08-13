@@ -10,6 +10,7 @@ function PopUp() {
           <div className="centerdiv">
             <h2>Important !!</h2>
             <br />
+            <h4>Not Official Site (Student made).</h4><br/>
             <p>
               Only <b>Aquamarine </b>for Boy's hostel is ready for{" "}
               <b>online allocation.</b>For rest of the hostels will be updated

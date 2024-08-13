@@ -8,7 +8,7 @@
 }
 
 .popup-bg .centerdiv {
-    max-width: 60vw;
+    width: 60vw;
     background-color: rgb(255, 255, 255);
     border-radius: 20px;
     padding: 15px;

@@ -8,7 +8,7 @@ function RegisterPage() {
   const [confirmPassword, setConfirmPassword] = useState(""); // State for confirm password
   const [otp, setOtp] = useState("");  // State for OTP
   const [isOtpSent, setIsOtpSent] = useState(false);  // State to track OTP sending status
-  const [buttonText, setButtonText] = useState('Register');
+  const [buttonText, setButtonText] = useState('Send OTP');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
