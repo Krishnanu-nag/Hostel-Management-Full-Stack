@@ -1,6 +1,6 @@
 *{
   margin: 0;
-  font-family:Arial, Helvetica, sans-serif;
+  /* font-family:Arial, Helvetica, sans-serif; */
   
 }
 h1 {
@@ -62,7 +62,7 @@ button:hover{
 #loginPage{
   border: 2px solid #000000;
   border-radius: 20px;
-  padding: 5em ;
+  padding: 2em 4em ;
   min-width: 20vw;
 }
 #loginPage h1{
