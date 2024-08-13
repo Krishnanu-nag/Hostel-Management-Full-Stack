@@ -31,7 +31,7 @@ function RegisterPage() {
         return;
       }
       console.log(studentId[0],studentId[1])
-      if (!(studentId.startsWith("22") || studentId.startsWith("23"))) {
+      if (!(studentId.startsWith("22JE") || studentId.startsWith("23JE"))) {
         alert("Currently only for 22JE and 23JE students.");
         return;
       }
