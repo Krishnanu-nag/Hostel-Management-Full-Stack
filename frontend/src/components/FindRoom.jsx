@@ -53,6 +53,7 @@ function FindStudent() {
       {studentInfo && (
         <div className="student-info">
           <h3>Student Room Information:</h3>
+          <p><strong>Hostel:</strong> {studentInfo.hostel}</p>
           <p><strong>Block:</strong> {studentInfo.selectedBlock}</p>
           <p><strong>Floor:</strong> {studentInfo.selectedFloor}</p>
           <p><strong>Room:</strong> {studentInfo.selectedRoom}</p>

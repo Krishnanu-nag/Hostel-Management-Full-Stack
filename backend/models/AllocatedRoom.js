@@ -1,6 +1,11 @@
 const mongoose=require("mongoose")
+const { type } = require("os")
 
 const AllotedRoomSchema=new mongoose.Schema({
+    Hostel:{
+        type: String,
+        required:true,
+    },
     selectedBlock:{
        type: String,
        required:true,
