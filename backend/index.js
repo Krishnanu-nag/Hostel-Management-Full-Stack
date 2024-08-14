@@ -59,7 +59,7 @@ app.post('/send-otp', async (req, res) => {
   const { studentId } = req.body;
   const email = `${studentId}@iitism.ac.in`;  // Assuming studentId is the email address
   const otpdb = Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit OTP
-  console.log(otpdb)
+  // console.log(otpdb)
 
   try {
     // Store OTP in the database
