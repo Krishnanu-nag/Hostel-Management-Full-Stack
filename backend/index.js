@@ -83,7 +83,7 @@ app.post('/send-otp', async (req, res) => {
       from: process.env.EMAIL,
       to: email,
       subject: 'OTP for Registration ',
-      text: `Hi ${studentId},\n\nThanks for Registering\nThe OTP is valid for the next 2 mins so hurry up and get yourself registered !!\n\nHere is your OTP for registration : ${otpdb}`
+      text: `Hi ${studentId},\n\nHere is your OTP for registration : ${otpdb}\n\nThanks for Registering\nThe OTP is valid for the next 2 mins so hurry up and get yourself registered !!`
     };
 
     transporter.sendMail(mailOptions, function(error, info){
