@@ -39,23 +39,23 @@ app.post('/check-user', async (req, res) => {
 });
 
 
-//wish user depending on at which time they interact with our server
-function getWish() {
-  const currentHour = new Date().getHours();
+// //wish user depending on at which time they interact with our server
+// function getWish() {
+//   const currentHour = new Date().getHours();
   
-  if (currentHour >= 4 && currentHour < 12) {
-    return "Good Morning";
-  } else if (currentHour >= 12 && currentHour < 18) {
-    return "Good Afternoon";
-  } else {
-    return "Good Evening";
-  }
-}
+//   if (currentHour >= 4 && currentHour < 12) {
+//     return "Good Morning";
+//   } else if (currentHour >= 12 && currentHour < 18) {
+//     return "Good Afternoon";
+//   } else {
+//     return "Good Evening";
+//   }
+// }
 
 
 // Example usage
 app.post('/send-otp', async (req, res) => {
-  const wish=getWish()
+  // const wish=getWish()
   const { studentId } = req.body;
   const email = `${studentId}@iitism.ac.in`;  // Assuming studentId is the email address
   const otpdb = Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit OTP
@@ -83,7 +83,7 @@ app.post('/send-otp', async (req, res) => {
       from: process.env.EMAIL,
       to: email,
       subject: 'OTP for Registration ',
-      text: `${wish} ${studentId},\n\nThanks for Registering\nThe OTP is valid for the next 2 mins so hurry up and get yourself registered !!\n\nHere is your OTP for registration : ${otpdb}`
+      text: `Hi ${studentId},\n\nThanks for Registering\nThe OTP is valid for the next 2 mins so hurry up and get yourself registered !!\n\nHere is your OTP for registration : ${otpdb}`
     };
 
     transporter.sendMail(mailOptions, function(error, info){
@@ -140,7 +140,7 @@ app.post('/verify-otp', async (req, res) => {
 
 // Forgot Password Route
 app.post('/forgot-password', async (req, res) => {
-  const wish=getWish()
+  // const wish=getWish()
   const { studentId } = req.body;
   const email = `${studentId}@iitism.ac.in`;  // Construct the email address
   
@@ -162,7 +162,7 @@ app.post('/forgot-password', async (req, res) => {
         from: process.env.EMAIL,
         to: email,
         subject: `Password for ${studentId}`,
-        text: `${wish} ${studentId},\n\nSince you have forgotten your password we are here to help you out\n\nYour password is : ${user.password}`
+        text: `Hi ${studentId},\n\nSince you have forgotten your password we are here to help you out\n\nYour password is : ${user.password}`
       };
 
       transporter.sendMail(mailOptions, function(error, info) {
