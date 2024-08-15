@@ -38,7 +38,7 @@ function LandingPage() {
               colorchangeOut();
             }}
           >
-            Proceed to Log In
+            Proceed to Register
           </button>
           
         </Link>
