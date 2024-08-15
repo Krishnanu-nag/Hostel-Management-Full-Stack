@@ -17,10 +17,11 @@ function FindStudent() {
     const name = e.target.value;
     setStudentName(name.toUpperCase().trimStart());
 
-    // Clear ID input and suggestions when typing name
+    // Clear ID input, suggestions, and student info when typing name
     setStudentId("");
     setIdSuggestions([]);
     setStudentInfo(null); // Clear student info
+    setMessage(""); // Clear message
 
     if (name.length > 1) {
       try {
@@ -41,10 +42,11 @@ function FindStudent() {
     const id = e.target.value;
     setStudentId(id.toUpperCase().trim());
 
-    // Clear name input and suggestions when typing ID
+    // Clear name input, suggestions, and student info when typing ID
     setStudentName("");
     setNameSuggestions([]);
     setStudentInfo(null); // Clear student info
+    setMessage(""); // Clear message
 
     if (id.length > 1) {
       try {
@@ -86,6 +88,7 @@ function FindStudent() {
     setStudentName(suggestion);
     setNameSuggestions([]); // Clear suggestions after selecting
     setStudentInfo(null); // Clear student info
+    setMessage(""); // Clear message
   };
 
   // Function to select an ID from suggestions and clear the suggestions list
@@ -93,6 +96,7 @@ function FindStudent() {
     setStudentId(suggestion);
     setIdSuggestions([]); // Clear suggestions after selecting
     setStudentInfo(null); // Clear student info
+    setMessage(""); // Clear message
   };
 
   return (
