@@ -324,6 +324,43 @@ app.post('/find-student', async (req, res) => {
   }
 });
 
+// For student name suggestions
+app.get('/name-suggestions', async (req, res) => {
+  const { name } = req.query;
+
+  try {
+    const suggestions = await credentialModel
+      .find({ studentName: { $regex: new RegExp(name, 'i') } }) // Case-insensitive search
+      .limit(5) // Limit the number of suggestions
+      .select('studentName -_id'); // Select only studentName field
+
+    const names = suggestions.map((suggestion) => suggestion.studentName);
+    res.json(names);
+  } catch (error) {
+    console.error('Error fetching name suggestions:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// For student ID suggestions
+app.get('/id-suggestions', async (req, res) => {
+  const { id } = req.query;
+
+  try {
+    const suggestions = await credentialModel
+      .find({ studentId: { $regex: new RegExp(id, 'i') } }) // Case-insensitive search
+      .limit(5) // Limit the number of suggestions
+      .select('studentId -_id'); // Select only studentId field
+
+    const ids = suggestions.map((suggestion) => suggestion.studentId);
+    res.json(ids);
+  } catch (error) {
+    console.error('Error fetching ID suggestions:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
