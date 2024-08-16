@@ -1,54 +1,49 @@
-#aquamarineRoomPage{
-    background-color: rgb(64, 71, 71);
-    height: auto;
-    color: aliceblue;
-    text-align: center;
-    
-   
+#aquamarineRoomPage {
+  background-color: rgb(64, 71, 71);
+  height: auto;
+  color: aliceblue;
+  text-align: center;
 }
 
-
-#aquamarineRoomPage .form-container{
-    text-align: center;
-    padding: 20px;
-   
+#aquamarineRoomPage .form-container {
+  text-align: center;
+  padding: 20px;
 }
-#aquamarineRoomPage select{
-    border-radius: 10px;
+#aquamarineRoomPage select {
+  border-radius: 10px;
 }
 
-#legend{
-    margin: auto;
-    line-height: 30%;
-    border: 2px solid white;
-    padding: 5px;
-    max-width: 250px;
+#legend {
+  margin: auto;
+  line-height: 30%;
+  border: 2px solid white;
+  padding: 5px;
+  max-width: 250px;
+}
+.box {
+  width: 30px;
+  height: 30px;
+  border: 2px solid;
+}
+#vacant {
+  background-color: rgb(19, 180, 19);
+}
+#occupied {
+  background-color: red;
+}
+#selected {
+  background-color: blueviolet;
+}
+#legend label {
+  position: relative;
+  bottom: 17px;
+}
 
-}
-.box{
-    width: 30px;
-    height: 30px;
-    border: 2px solid ;    
-}
-#vacant{
-    background-color: rgb(19, 180, 19);
-}
-#occupied{
-    background-color:red;
-}
-#selected{
-    background-color: blueviolet;
-}
-#legend label{
-    position: relative;
-    bottom:17px
-}
-
-.accomodationInfo{
-    margin: 20px 15vw;
-    border: 2px solid white;
-    padding: 5px;
-    max-width: 250px;
-    margin: auto;
-    margin-top:20px ;
+.accomodationInfo {
+  margin: 20px 15vw;
+  border: 2px solid white;
+  padding: 5px;
+  max-width: 250px;
+  margin: auto;
+  margin-top: 20px;
 }

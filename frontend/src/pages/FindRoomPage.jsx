@@ -1,11 +1,10 @@
 import MainLayout from "../layout/MainLayout";
-import FindRoom from "../components/FindRoom"
+import FindRoom from "../components/FindRoom";
 function FindRoomPage() {
-
   return (
-    <> 
+    <>
       <MainLayout>
-       <FindRoom/>
+        <FindRoom />
       </MainLayout>
     </>
   );

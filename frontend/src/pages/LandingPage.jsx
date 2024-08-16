@@ -8,11 +8,11 @@ function LandingPage() {
   function colorchangeOut() {
     document.querySelector(".title").style.color = "black";
   }
-  
-   //IIFE called
 
-  (function (){
-    localStorage.removeItem("studentId");            
+  //IIFE called
+
+  (function () {
+    localStorage.removeItem("studentId");
   })();
 
   return (
@@ -20,8 +20,8 @@ function LandingPage() {
       <div className="centerdiv" id="landingPage">
         <img src="./ismlogo.jpg" />
         <p className="title">IIT ISM Hostel Management Portal</p>
-        <Link to ="/home-page">
-        <button
+        <Link to="/home-page">
+          <button
             className="login_btn"
             onMouseEnter={colorchangeEnter}
             onMouseLeave={() => {
@@ -29,7 +29,10 @@ function LandingPage() {
             }}
           >
             Proceed to Home Page
-          </button></Link><br/><br/>
+          </button>
+        </Link>
+        <br />
+        <br />
         <Link to="/register-page">
           <button
             className="login_btn"
@@ -40,7 +43,6 @@ function LandingPage() {
           >
             Proceed to Register
           </button>
-          
         </Link>
       </div>
     </>

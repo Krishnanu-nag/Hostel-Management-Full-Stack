@@ -5,7 +5,6 @@ import { useState } from "react";
 function Navbar() {
   const navigate = useNavigate();
 
-
   function logOut() {
     localStorage.removeItem("studentId");
     navigate("/login-page");
@@ -46,7 +45,10 @@ function Navbar() {
             <a className="dropbtn">Book Hostel ▼</a>
             <div className="dropdown-content">
               <span className="dropdown">
-                <a className="sub-dropbtn" style={{ backgroundColor: "#b11e1e", cursor: "default" }}>
+                <a
+                  className="sub-dropbtn"
+                  style={{ backgroundColor: "#b11e1e", cursor: "default" }}
+                >
                   Boys Hostel
                 </a>
                 <div className="sub-dropdown-content">
@@ -62,7 +64,10 @@ function Navbar() {
                 </div>
               </span>
               <span className="dropdown">
-                <a className="sub-dropbtn" style={{ backgroundColor: "#b11e1e", cursor: "default" }}>
+                <a
+                  className="sub-dropbtn"
+                  style={{ backgroundColor: "#b11e1e", cursor: "default" }}
+                >
                   Girls Hostel
                 </a>
                 <div className="sub-dropdown-content">
@@ -73,7 +78,9 @@ function Navbar() {
                     New Rosaline
                   </Link> */}
                   <Link to="/aquamarine-page" id="oldRosaline">
-                    Old Rosaline<br/>(Soon)
+                    Old Rosaline
+                    <br />
+                    (Soon)
                   </Link>
                 </div>
               </span>

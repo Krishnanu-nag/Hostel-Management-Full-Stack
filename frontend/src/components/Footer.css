@@ -1,26 +1,22 @@
-.footerlogobar{
-    background-color: #b1040e;
-    width: 100vw;
-    height:12vh;
-    margin: 0px;
-    text-align: center;
-    z-index: 2;
-
-   
+.footerlogobar {
+  background-color: #b1040e;
+  width: 100vw;
+  height: 12vh;
+  margin: 0px;
+  text-align: center;
+  z-index: 2;
 }
-.footerlogo{
-    height:10vh ;  
-    padding: 7px 0;
-    z-index: 2;
-
-}    
-.copyright{
-    text-align: center;
-    background-color: black;
-    color: aliceblue;
-    padding: 3px 0;
-    position: sticky;
-    bottom: 0;
-    z-index: 2;
- 
+.footerlogo {
+  height: 10vh;
+  padding: 7px 0;
+  z-index: 2;
+}
+.copyright {
+  text-align: center;
+  background-color: black;
+  color: aliceblue;
+  padding: 3px 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
 }

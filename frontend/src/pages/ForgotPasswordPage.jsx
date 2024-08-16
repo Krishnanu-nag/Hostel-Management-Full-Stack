@@ -7,7 +7,7 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 
 function ForgotPasswordPage() {
   const [studentId, setStudentId] = useState("");
-  const [buttonText, setButtonText] = useState('Get Password over mail');
+  const [buttonText, setButtonText] = useState("Get Password over mail");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate();
 
@@ -15,30 +15,35 @@ function ForgotPasswordPage() {
     e.preventDefault();
 
     if (studentId !== "") {
-      setButtonText('Sending...');
+      setButtonText("Sending...");
       setIsButtonDisabled(true);
 
       try {
-        const result = await axios.post(`${baseURL}/forgot-password`, { studentId });
+        const result = await axios.post(`${baseURL}/forgot-password`, {
+          studentId,
+        });
 
         if (result.data === "PasswordSent") {
-          alert(`Password has been sent to your email at : ${studentId}@iitism.ac.in.`);
+          alert(
+            `Password has been sent to your email at : ${studentId}@iitism.ac.in.`
+          );
           navigate("/login-page");
         } else if (result.data === "UserNotFound") {
-          alert("No user found with this Student ID . Please type Student ID only and try again.");
+          alert(
+            "No user found with this Student ID . Please type Student ID only and try again."
+          );
         }
       } catch (error) {
         console.error("Error in sending password:", error);
         alert("An error occurred while sending your password.");
       } finally {
-        setButtonText('Get Password');
+        setButtonText("Get Password");
         setIsButtonDisabled(false);
       }
     } else {
       alert("Please enter your Student ID.");
     }
   };
-
 
   return (
     <div className="centerdiv" id="loginPage">
@@ -51,12 +56,16 @@ function ForgotPasswordPage() {
           value={studentId}
           onChange={(e) => setStudentId(e.target.value.toUpperCase())}
         />
-        <br /><br />
-        <button onClick={handleSubmit}  disabled={isButtonDisabled}>
+        <br />
+        <br />
+        <button onClick={handleSubmit} disabled={isButtonDisabled}>
           {buttonText}
-        </button>     
-      </form><br/>
-      <Link to="/login-page">Back to Log In</Link><br /><br />
+        </button>
+      </form>
+      <br />
+      <Link to="/login-page">Back to Log In</Link>
+      <br />
+      <br />
     </div>
   );
 }

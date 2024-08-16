@@ -69,7 +69,10 @@ function FindStudent() {
     setStudentInfo(null);
 
     try {
-      const response = await axios.post(`${baseURL}/find-student`, { studentId, studentName });
+      const response = await axios.post(`${baseURL}/find-student`, {
+        studentId,
+        studentName,
+      });
       if (response.data === "RoomNotAllocated") {
         setMessage("Room not allocated yet.");
       } else {
@@ -103,7 +106,10 @@ function FindStudent() {
     <div className="find-student-container">
       <h2>Find Student's Room</h2>
       <form>
-        <p>**For student name, there should be only one blank space between the first, middle, and last names.</p>
+        <p>
+          **For student name, there should be only one blank space between the
+          first, middle, and last names.
+        </p>
         <input
           type="text"
           placeholder="Enter Student Name"
@@ -136,7 +142,7 @@ function FindStudent() {
           </ul>
         )}
       </form>
-      <br/>
+      <br />
       <button onClick={handleSearch} type="submit" disabled={loading}>
         {loading ? "Searching..." : "Find Room"}
       </button>
@@ -146,10 +152,18 @@ function FindStudent() {
       {studentInfo && (
         <div className="student-info">
           <h3>Student Room Information:</h3>
-          <p><strong>Hostel:</strong> {studentInfo.hostel}</p>
-          <p><strong>Block:</strong> {studentInfo.selectedBlock}</p>
-          <p><strong>Floor:</strong> {studentInfo.selectedFloor}</p>
-          <p><strong>Room:</strong> {studentInfo.selectedRoom}</p>
+          <p>
+            <strong>Hostel:</strong> {studentInfo.hostel}
+          </p>
+          <p>
+            <strong>Block:</strong> {studentInfo.selectedBlock}
+          </p>
+          <p>
+            <strong>Floor:</strong> {studentInfo.selectedFloor}
+          </p>
+          <p>
+            <strong>Room:</strong> {studentInfo.selectedRoom}
+          </p>
         </div>
       )}
     </div>

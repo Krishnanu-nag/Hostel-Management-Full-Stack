@@ -16,7 +16,9 @@ function RoomBooked() {
     if (studentId) {
       const fetchStudentInfo = async () => {
         try {
-          const response = await axios.post(`${baseURL}/find-student`, { studentId });
+          const response = await axios.post(`${baseURL}/find-student`, {
+            studentId,
+          });
           if (response.data === "RoomNotAllocated") {
             setMessage("Room not allocated yet.");
           } else {
@@ -54,14 +56,16 @@ function RoomBooked() {
           ) : (
             <>
               <h2>
-                Dear {studentId} <br /><br />
+                Dear {studentId} <br />
+                <br />
                 Room Booked Successfully !!!
               </h2>
               <br />
               <h2>Your Allotted Room No :</h2>
               <br />
               <h1>
-                {studentInfo.selectedBlock}/{studentInfo.selectedFloor}/{studentInfo.selectedRoom}
+                {studentInfo.selectedBlock}/{studentInfo.selectedFloor}/
+                {studentInfo.selectedRoom}
               </h1>
               <br />
               <br />

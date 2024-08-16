@@ -1,20 +1,19 @@
-.confirmRoom{
-    display: flex;
-    justify-content: center;
+.confirmRoom {
+  display: flex;
+  justify-content: center;
 }
-.container{
-    background-color: aliceblue;
-    color: black;
-    width:75px;
-    height: 50px;
-    margin: 0 5px;
-    display: flex;
-    justify-content: center;
+.container {
+  background-color: aliceblue;
+  color: black;
+  width: 75px;
+  height: 50px;
+  margin: 0 5px;
+  display: flex;
+  justify-content: center;
 }
 
-.confirmation{
-    text-align: center;
-    max-width: 330px;
-    margin: auto;
-
+.confirmation {
+  text-align: center;
+  max-width: 330px;
+  margin: auto;
 }

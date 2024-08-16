@@ -8,8 +8,8 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 function LoginPage() {
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
-  const [newLogin, setNewLogin] = useState(false);  // Tracks if a new login attempt is made
-  const [buttonText, setButtonText] = useState('Login');
+  const [newLogin, setNewLogin] = useState(false); // Tracks if a new login attempt is made
+  const [buttonText, setButtonText] = useState("Login");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -31,10 +31,10 @@ function LoginPage() {
   const submit = async (e) => {
     e.preventDefault();
     if (studentId && password) {
-      setButtonText('Verifying...');
+      setButtonText("Verifying...");
       setIsButtonDisabled(true);
 
-      setNewLogin(true);  // Old account details get deleted and new ones get stored
+      setNewLogin(true); // Old account details get deleted and new ones get stored
 
       // localStorage.setItem('password', password);
 
@@ -46,7 +46,7 @@ function LoginPage() {
 
         if (result.data === "Success") {
           alert(`Welcome ${studentId}`);
-          localStorage.setItem('studentId', studentId);
+          localStorage.setItem("studentId", studentId);
           navigate("/home-page");
         } else if (result.data === "Failed") {
           alert("Invalid Password");
@@ -59,7 +59,7 @@ function LoginPage() {
         console.error("Error during login:", error);
         alert("An error occurred. Please try again.");
       } finally {
-        setButtonText('Login');
+        setButtonText("Login");
         setIsButtonDisabled(false);
       }
     } else {
@@ -76,28 +76,37 @@ function LoginPage() {
           type="text"
           placeholder="Student ID: 22JEXXXX"
           value={studentId}
-          onChange={(e) => setStudentId((e.target.value.toUpperCase()).trim())}
+          onChange={(e) => setStudentId(e.target.value.toUpperCase().trim())}
         />
-        <br /><br />
+        <br />
+        <br />
         <input
           className="password"
           type={showPassword ? "text" : "password"}
           placeholder="Enter Password"
           value={password}
-          onChange={(e) => setPassword((e.target.value).trimStart())}
+          onChange={(e) => setPassword(e.target.value.trimStart())}
         />
         <br />
         <a className="passwordVisbility" type="button" onClick={togglePassword}>
-            {showPassword ? "Hide" : "Show"}
-          </a>
+          {showPassword ? "Hide" : "Show"}
+        </a>
         <br />
         <button type="submit" disabled={isButtonDisabled}>
           {buttonText}
         </button>
       </form>
-      <br /><Link to="/forgot-password-page">Forgot password?</Link><br /><br />
-      <Link to="/register-page">Not registered?</Link><br /><br />
-      <Link to="/home-page" onClick={guestLogin}>Guest User <br />(No credentials required)</Link>
+      <br />
+      <Link to="/forgot-password-page">Forgot password?</Link>
+      <br />
+      <br />
+      <Link to="/register-page">Not registered?</Link>
+      <br />
+      <br />
+      <Link to="/home-page" onClick={guestLogin}>
+        Guest User <br />
+        (No credentials required)
+      </Link>
     </div>
   );
 }

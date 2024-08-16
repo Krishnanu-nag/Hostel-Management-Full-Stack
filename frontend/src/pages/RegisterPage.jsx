@@ -7,17 +7,19 @@ function RegisterPage() {
   const [studentName, setStudentName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState(""); // State for confirm password
-  const [otp, setOtp] = useState("");  // State for OTP
-  const [isOtpSent, setIsOtpSent] = useState(false);  // State to track OTP sending status
-  const [buttonText, setButtonText] = useState('Send OTP');
+  const [otp, setOtp] = useState(""); // State for OTP
+  const [isOtpSent, setIsOtpSent] = useState(false); // State to track OTP sending status
+  const [buttonText, setButtonText] = useState("Send OTP");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate();
   const baseURL = import.meta.env.VITE_BASE_URL;
-  const [hasAlerted, setHasAlerted] = useState(false); 
+  const [hasAlerted, setHasAlerted] = useState(false);
 
   useEffect(() => {
     if (password !== "" && !hasAlerted) {
-      alert("Don't set your official password. Set something creative. I know you are good at it.");
+      alert(
+        "Don't set your official password. Set something creative. I know you are good at it."
+      );
       setHasAlerted(true); // Set to true so the alert doesn't show again
     }
   }, [password, hasAlerted]);
@@ -30,37 +32,45 @@ function RegisterPage() {
         alert("Passwords do not match!");
         return;
       }
-      
+
       if (!(studentId.startsWith("22JE") || studentId.startsWith("23JE"))) {
         alert("Currently only for 22JE and 23JE students.");
         return;
       }
-      setButtonText('Wait...');
+      setButtonText("Wait...");
       setIsButtonDisabled(true);
 
       try {
         // Check if the user already exists
-        const userCheckResult = await axios.post(`${baseURL}/check-user`, { studentId });
+        const userCheckResult = await axios.post(`${baseURL}/check-user`, {
+          studentId,
+        });
 
         if (userCheckResult.data === "ExistingUser") {
           alert("User exists! Redirecting to login.");
           navigate("/login-page");
         } else {
           // Send OTP if the user doesn't exist
-          const otpSendResult = await axios.post(`${baseURL}/send-otp`, { studentId });
+          const otpSendResult = await axios.post(`${baseURL}/send-otp`, {
+            studentId,
+          });
 
           if (otpSendResult.data === "OtpSent") {
-            setIsOtpSent(true);  // OTP sent, proceed to OTP verification
-            alert(`OTP sent to ${studentId}@iitism.ac.in! Please check your email.`);
+            setIsOtpSent(true); // OTP sent, proceed to OTP verification
+            alert(
+              `OTP sent to ${studentId}@iitism.ac.in! Please check your email.`
+            );
           } else {
             alert("Failed to send OTP. Please try again.");
           }
         }
       } catch (error) {
         console.error("Error occurred:", error);
-        alert("An error occurred while sending OTP. Please type Student ID only and try again.");
+        alert(
+          "An error occurred while sending OTP. Please type Student ID only and try again."
+        );
       } finally {
-        setButtonText('Register');
+        setButtonText("Register");
         setIsButtonDisabled(false);
       }
     } else {
@@ -70,7 +80,7 @@ function RegisterPage() {
 
   const verifyOtp = async () => {
     if (otp.trim()) {
-      setButtonText('Verifying...');
+      setButtonText("Verifying...");
       setIsButtonDisabled(true);
 
       try {
@@ -78,15 +88,14 @@ function RegisterPage() {
           studentName,
           studentId,
           otp,
-          password
+          password,
         });
 
         if (verifyResult.data === "OtpVerified") {
           alert("Successfully registered!");
-          localStorage.setItem('studentId', studentId);
+          localStorage.setItem("studentId", studentId);
           navigate("/home-page");
-        } 
-        else if (verifyResult.data === "InvalidOtp") {
+        } else if (verifyResult.data === "InvalidOtp") {
           alert("Invalid OTP. Please try again.");
         } else if (verifyResult.data === "ExistingUser") {
           alert("User already exists! Redirecting to login.");
@@ -96,7 +105,7 @@ function RegisterPage() {
         console.error("Error during OTP verification:", error);
         alert("An error occurred during OTP verification. Please try again.");
       } finally {
-        setButtonText('Register');
+        setButtonText("Register");
         setIsButtonDisabled(false);
       }
     } else {
@@ -123,16 +132,20 @@ function RegisterPage() {
           type="text"
           placeholder="Student ID: 22JEXXXX"
           value={studentId}
-          onChange={(e) => setStudentId((e.target.value.toUpperCase()).trim())}
-          disabled={isOtpSent}  // Disable editing if OTP is sent
-        /><br />
+          onChange={(e) => setStudentId(e.target.value.toUpperCase().trim())}
+          disabled={isOtpSent} // Disable editing if OTP is sent
+        />
+        <br />
         <input
           type="text"
           placeholder="Enter Name"
           value={studentName}
-          onChange={(e) => setStudentName((e.target.value.toUpperCase()).trimStart())}
-          disabled={isOtpSent}  // Disable editing if OTP is sent
-        /><br />
+          onChange={(e) =>
+            setStudentName(e.target.value.toUpperCase().trimStart())
+          }
+          disabled={isOtpSent} // Disable editing if OTP is sent
+        />
+        <br />
         {!isOtpSent && (
           <>
             <input
@@ -140,24 +153,33 @@ function RegisterPage() {
               type={showPassword ? "text" : "password"}
               placeholder="Set Password"
               value={password}
-              onChange={(e) => setPassword((e.target.value).trimStart())}
+              onChange={(e) => setPassword(e.target.value.trimStart())}
             />
-              <br />
+            <br />
             <input
               className="password"
               type={showPassword ? "text" : "password"}
               placeholder="Confirm Password"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword((e.target.value).trimStart())}
-            /><br />
-            <a className="passwordVisbility" type="button" onClick={togglePassword}>
+              onChange={(e) => setConfirmPassword(e.target.value.trimStart())}
+            />
+            <br />
+            <a
+              className="passwordVisbility"
+              type="button"
+              onClick={togglePassword}
+            >
               {showPassword ? "Hide" : "Show"}
-            </a><br />
-            
+            </a>
+            <br />
           </>
         )}
         {!isOtpSent ? (
-          <button type="submit" onClick={checkAndSendOtp} disabled={isButtonDisabled}>
+          <button
+            type="submit"
+            onClick={checkAndSendOtp}
+            disabled={isButtonDisabled}
+          >
             {buttonText}
           </button>
         ) : (
@@ -167,15 +189,31 @@ function RegisterPage() {
               placeholder="Enter OTP"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
-            /><br /><br />
-            <button type="button" onClick={verifyOtp} disabled={isButtonDisabled}>
+            />
+            <br />
+            <br />
+            <button
+              type="button"
+              onClick={verifyOtp}
+              disabled={isButtonDisabled}
+            >
               {buttonText}
             </button>
           </>
         )}
-      </form><br /><br />
-      <Link to="/login-page">Already registered?<br/> Log in here.</Link><br /><br />
-      <Link to="/home-page" onClick={guestLogin}>Guest User <br />(No credentials required)</Link>
+      </form>
+      <br />
+      <br />
+      <Link to="/login-page">
+        Already registered?
+        <br /> Log in here.
+      </Link>
+      <br />
+      <br />
+      <Link to="/home-page" onClick={guestLogin}>
+        Guest User <br />
+        (No credentials required)
+      </Link>
     </div>
   );
 }

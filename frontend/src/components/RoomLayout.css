@@ -1,88 +1,87 @@
-
 #aquamarineRoomLayout {
-    text-align: center;
-    margin: 0 30px;
-    height: auto;
+  text-align: center;
+  margin: 0 30px;
+  height: auto;
 }
 
 #aquamarineRoomSelect {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    background-color: rgb(58, 57, 56);
-    padding: 20px;
-    margin: auto;
-    height: auto;
-    max-width: 330px;
-    position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: rgb(58, 57, 56);
+  padding: 20px;
+  margin: auto;
+  height: auto;
+  max-width: 330px;
+  position: relative;
 }
 
 .room-block {
-    display: flex;
-    flex-direction: row;
-    margin: 5px;
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
 }
 
 .custom-radio input[type="radio"] {
-    display: none;
+  display: none;
 }
 
 .custom-radio .half-room {
-    width: 45px;
-    height: 3em;
-    border: 1px solid #ffffff;
-    position: relative;
-    color: rgb(255, 255, 255);
-    background-color: rgb(19, 180, 19);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    text-align: center;
-    margin: 2px;
+  width: 45px;
+  height: 3em;
+  border: 1px solid #ffffff;
+  position: relative;
+  color: rgb(255, 255, 255);
+  background-color: rgb(19, 180, 19);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-align: center;
+  margin: 2px;
 }
 
 /* Add extra margin to even-numbered rooms */
 .room-block:nth-child(even) {
-    margin-left: 50px; /* Adjust the value for the desired gap */
+  margin-left: 50px; /* Adjust the value for the desired gap */
 }
 
 .room-number {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1em;
-    z-index: 2;
-    pointer-events: none;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1em;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .half-label {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.8em;
-    z-index: 2;
-    pointer-events: none;
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8em;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .left-half {
-    background-color: rgb(19, 180, 19);
+  background-color: rgb(19, 180, 19);
 }
 
 .right-half {
-    background-color: rgb(19, 180, 19);
+  background-color: rgb(19, 180, 19);
 }
 
 .custom-radio input[value$="."]:checked + .half-room.left-half {
-    background-color: blueviolet;
+  background-color: blueviolet;
 }
 
 .custom-radio input[value$=":"]:checked + .half-room.right-half {
-    background-color: blueviolet;
+  background-color: blueviolet;
 }
 
 .custom-radio .half-room:hover {
-    background-color: #2f4c30;
+  background-color: #2f4c30;
 }

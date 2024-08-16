@@ -1,86 +1,78 @@
 #homePage {
-    background-color: #b1040d75;
-    padding-bottom: 20px;
-    text-align: left;
-    font-size: 13px;
-    overflow: hidden;
+  background-color: #b1040d75;
+  padding-bottom: 20px;
+  text-align: left;
+  font-size: 13px;
+  overflow: hidden;
 }
 
 .titleContainer {
-    text-align: center;
-    background-color: #b1040dbe;
-    padding: 10px 0;
-}
-
-.animatedTitle {
-    font-size: 2.2em;
-    animation: titleFadeIn 2.5s ease-in-out forwards;
-    opacity: 0;
+  text-align: center;
+  background-color: #b1040dbe;
+  padding: 10px 0;
 }
 
 .homeContent {
-    max-width: 100vw;
-    margin: 35px;
-    font-size: 1.5em;
+  max-width: 100vw;
+  margin: 35px;
+  font-size: 1.5em;
 }
 
 .contentBlock {
-    margin: 20px 0;
-    opacity: 0;
-    animation-duration: 2.5s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
+  margin: 20px 0;
+  opacity: 0;
+  animation-duration: 2.5s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 @keyframes titleFadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideInLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideInRight {
-    0% {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .slideInLeft {
-    animation-name: slideInLeft;
+  animation-name: slideInLeft;
 }
 
 .slideInRight {
-    animation-name: slideInRight;
+  animation-name: slideInRight;
 }
 
 p strong {
-    display: inline-block;
-    transition: color 0.3s ease;
+  display: inline-block;
+  transition: color 0.3s ease;
 }
 
-
-
-.heritageImage{
-    width:100vw;
-    text-align: center; 
-  }
+.heritageImage {
+  width: 100vw;
+  text-align: center;
+}
