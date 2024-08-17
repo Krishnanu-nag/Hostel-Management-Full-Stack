@@ -314,7 +314,8 @@ app.get("/name-suggestions", async (req, res) => {
   const { name } = req.query;
 
   try {
-    const suggestions = await credentialModel
+    const suggestions = await AllocatedRoomModel
+    // const suggestions = await credentialModel
       .find({ studentName: { $regex: new RegExp(name, "i") } }) // Case-insensitive search
       .limit(5) // Limit the number of suggestions
       .select("studentName -_id"); // Select only studentName field
@@ -332,7 +333,8 @@ app.get("/id-suggestions", async (req, res) => {
   const { id } = req.query;
 
   try {
-    const suggestions = await credentialModel
+    // const suggestions = await credentialModel
+    const suggestions = await AllocatedRoomModel
       .find({ studentId: { $regex: new RegExp(id, "i") } }) // Case-insensitive search
       .limit(5) // Limit the number of suggestions
       .select("studentId -_id"); // Select only studentId field
