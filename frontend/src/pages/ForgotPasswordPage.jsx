@@ -54,7 +54,7 @@ function ForgotPasswordPage() {
           type="text"
           placeholder="Student ID: 22JEXXXX"
           value={studentId}
-          onChange={(e) => setStudentId(e.target.value.toUpperCase())}
+          onChange={(e) => setStudentId(e.target.value.toUpperCase().trimStart())}
         />
         <br />
         <br />
