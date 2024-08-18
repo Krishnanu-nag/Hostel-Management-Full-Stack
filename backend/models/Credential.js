@@ -12,7 +12,7 @@ const Studentschema=new mongoose.Schema({
     password:{
         type:String, 
         required:true
-    }  ///string x it should be String capital S
+    }  
 })
 
 const credentialModel=mongoose.model("credential",Studentschema)
