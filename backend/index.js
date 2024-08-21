@@ -298,6 +298,7 @@ app.post("/find-student", async (req, res) => {
         selectedBlock: allocation.selectedBlock,
         selectedFloor: allocation.selectedFloor,
         selectedRoom: allocation.selectedRoom,
+        studentName:allocation.studentName,
       });
     } else {
       // Respond if the student does not have a room allocated
