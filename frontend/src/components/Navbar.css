@@ -42,7 +42,7 @@ header {
   background-color: transparent;
   color: rgb(0, 0, 0);
   padding: 2px;
-  font-size: 17px;
+  font-size: 18px;
   border: none;
   cursor: pointer; /* Show pointer cursor on hover */
 }
@@ -89,3 +89,16 @@ header {
   color: #f1f1f1;
   border-radius: 0%; /* Remove rounded corners */
 }
+
+@media screen and (max-width: 450px) {
+  .dropbtn {
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+    padding: 2px;
+    font-size: 14px;
+    border: none;
+  }
+ 
+}
+
+
