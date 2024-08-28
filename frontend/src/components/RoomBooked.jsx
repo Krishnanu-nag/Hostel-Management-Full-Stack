@@ -93,7 +93,7 @@ function RoomBooked() {
           ) : message ? (
             <h2>{message}</h2>
           ) : (
-            <>
+            <><br/>
               <h2>
                 Dear {studentId} <br />
                 <br />
@@ -108,12 +108,13 @@ function RoomBooked() {
               </h1>
               <br />
               <br />
-              <button onClick={generatePDF}>Print Document</button>
+              <button onClick={generatePDF}>Print</button>
               <br />
               <br />
               <Link to="/thanks-page">
-                <button onClick={logout}>Click here to Logout</button>
+                <button onClick={logout}>Logout</button>
               </Link>
+              <br/>
             </>
           )}
         </div>

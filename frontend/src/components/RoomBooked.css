@@ -1,6 +1,6 @@
 #roomBooked {
   background-color: rgb(64, 71, 71);
-  height: 67vh;
+  height: auto;
   color: aliceblue;
   text-align: center;
   z-index: -2;
