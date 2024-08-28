@@ -1,7 +1,9 @@
 #roomBooked {
   background-color: rgb(64, 71, 71);
-  height: auto;
+  height: 75vh;
   color: aliceblue;
-  text-align: center;
-  z-index: -2;
+  text-align: center; 
+}
+#roomBooked .centerdiv{
+ margin-top: 25px;
 }

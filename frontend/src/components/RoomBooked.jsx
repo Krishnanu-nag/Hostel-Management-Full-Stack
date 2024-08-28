@@ -114,7 +114,8 @@ function RoomBooked() {
               <Link to="/thanks-page">
                 <button onClick={logout}>Logout</button>
               </Link>
-              <br/>
+
+              
             </>
           )}
         </div>
