@@ -69,6 +69,7 @@ button:hover {
   border: 1px solid rgb(0, 0, 0);
   padding: 0.5em;
   border-radius: 10px;
+  width: 200px;
 }
 #loginPage img {
   width: 100px;
@@ -90,7 +91,7 @@ button:hover {
 }
 .passwordVisbility {
   position: relative;
-  left: 56px;
+  left: 75px;
   bottom: 33px;
   font-size: 13px;
 }
