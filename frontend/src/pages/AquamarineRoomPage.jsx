@@ -142,7 +142,7 @@ function AquamarineRoomPage() {
               <option value="" hidden>
                 Select
               </option>
-              <option value="G">G</option>
+              <option value="0">0</option>
               <option value="01">1</option>
               <option value="02">2</option>
               <option value="03">3</option>
@@ -261,3 +261,4 @@ function AquamarineRoomPage() {
 }
 
 export default AquamarineRoomPage;
+
