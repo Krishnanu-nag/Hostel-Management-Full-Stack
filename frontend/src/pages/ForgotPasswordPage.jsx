@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-const baseURL = import.meta.env.VITE_BASE_URL;
+const forgotPasswordURL = `${import.meta.env.VITE_BASE_URL}/forgot-password`;
 
 function ForgotPasswordPage() {
   const [studentId, setStudentId] = useState("");
@@ -22,24 +22,19 @@ function ForgotPasswordPage() {
     setIsButtonDisabled(true);
 
     try {
-      const result = await axios.post(
-        `${baseURL}/forgot-password`,
-        { studentId },
-        { timeout: 15000 } // 🔥 prevents infinite loading in deploy
-      );
+      const result = await axios.post(forgotPasswordURL, {
+        studentId,
+      });
 
       if (result.data === "PasswordSent") {
         alert(`Password sent to ${studentId}@iitism.ac.in`);
         navigate("/login-page");
       } else if (result.data === "UserNotFound") {
         alert("No user found with this Student ID");
-      } else {
-        alert("Unexpected response from server");
       }
-
     } catch (error) {
       console.error("Forgot password error:", error);
-      alert("Request failed or timed out");
+      alert("Request failed");
     } finally {
       setButtonText("Get Password over mail");
       setIsButtonDisabled(false);
@@ -75,6 +70,7 @@ function ForgotPasswordPage() {
 }
 
 export default ForgotPasswordPage;
+
 
 // import { Link, useNavigate } from "react-router-dom";
 // import { useState } from "react";
