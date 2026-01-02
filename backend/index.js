@@ -131,49 +131,93 @@ app.post("/verify-otp", async (req, res) => {
 });
 
 // Forgot Password Route
+// app.post("/forgot-password", async (req, res) => {
+//   // const wish=getWish()
+//   const { studentId } = req.body;
+//   const email = `${studentId}@iitism.ac.in`; // Construct the email address
+
+//   try {
+//     // Find the user by studentId
+//     const user = await credentialModel.findOne({ studentId });
+
+//     if (user) {
+//       // Setup nodemailer
+//       const transporter = nodemailer.createTransport({
+//         service: "gmail",
+//         auth: {
+//           user: process.env.EMAIL,
+//           pass: process.env.EMAIL_PASSWORD,
+//         },
+//       });
+
+//       const mailOptions = {
+//         from: process.env.EMAIL,
+//         to: email,
+//         subject: `Password for ${studentId}`,
+//         text: `Hi ${studentId},\n\nSince you have forgotten your password we are here to help you out\n\nYour password is : ${user.password}`,
+//       };
+
+//       transporter.sendMail(mailOptions, function (error, info) {
+//         if (error) {
+//           console.log(error);
+//           res.status(500).send("Error sending email");
+//         } else {
+//           console.log("Email sent: " + info.response);
+//           res.status(200).json("PasswordSent");
+//         }
+//       });
+//     } else {
+//       res.json("UserNotFound");
+//     }
+//   } catch (error) {
+//     console.error("Error in forgot password:", error);
+//     res.status(500).send("Internal Server Error");
+//   }
+// });
+
 app.post("/forgot-password", async (req, res) => {
-  // const wish=getWish()
   const { studentId } = req.body;
-  const email = `${studentId}@iitism.ac.in`; // Construct the email address
+
+  if (!studentId) {
+    return res.status(400).json("InvalidStudentId");
+  }
 
   try {
-    // Find the user by studentId
     const user = await credentialModel.findOne({ studentId });
 
-    if (user) {
-      // Setup nodemailer
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.EMAIL,
-          pass: process.env.EMAIL_PASSWORD,
-        },
-      });
-
-      const mailOptions = {
-        from: process.env.EMAIL,
-        to: email,
-        subject: `Password for ${studentId}`,
-        text: `Hi ${studentId},\n\nSince you have forgotten your password we are here to help you out\n\nYour password is : ${user.password}`,
-      };
-
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-          res.status(500).send("Error sending email");
-        } else {
-          console.log("Email sent: " + info.response);
-          res.status(200).json("PasswordSent");
-        }
-      });
-    } else {
-      res.json("UserNotFound");
+    if (!user) {
+      return res.status(404).json("UserNotFound");
     }
-  } catch (error) {
-    console.error("Error in forgot password:", error);
-    res.status(500).send("Internal Server Error");
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL,
+      to: `${studentId}@iitism.ac.in`,
+      subject: `Password Recovery`,
+      text: `Hi ${studentId}, password recovery requested.`,
+    };
+
+    transporter.sendMail(mailOptions, (error) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json("MailError");
+      }
+      return res.status(200).json("PasswordSent");
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json("ServerError");
   }
 });
+
 
 app.post("/login-page", async (req, res) => {
   const { password, studentId } = req.body;
@@ -352,3 +396,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`connected to port ${PORT}`);
 });
+
