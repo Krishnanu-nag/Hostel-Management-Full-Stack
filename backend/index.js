@@ -178,42 +178,51 @@ app.post("/verify-otp", async (req, res) => {
 app.post("/forgot-password", async (req, res) => {
   const { studentId } = req.body;
 
+  // Validation
   if (!studentId) {
     return res.status(400).json("InvalidStudentId");
   }
 
   try {
+    // Find user
     const user = await credentialModel.findOne({ studentId });
 
     if (!user) {
       return res.status(404).json("UserNotFound");
     }
 
+    // Create transporter
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: process.env.EMAIL,
-        pass: process.env.EMAIL_PASSWORD,
+        pass: process.env.EMAIL_PASSWORD, // APP PASSWORD
       },
     });
 
-    const mailOptions = {
+    // Verify transporter (VERY IMPORTANT IN DEPLOY)
+    await transporter.verify();
+
+    // Send email (await — no callbacks)
+    await transporter.sendMail({
       from: process.env.EMAIL,
       to: `${studentId}@iitism.ac.in`,
       subject: `Password Recovery`,
-      text: `Hi ${studentId}, password recovery requested.`,
-    };
+      text: `Hi ${studentId},
 
-    transporter.sendMail(mailOptions, (error) => {
-      if (error) {
-        console.log(error);
-        return res.status(500).json("MailError");
-      }
-      return res.status(200).json("PasswordSent");
+Since you requested password recovery, here is your password:
+
+${user.password}
+
+Regards,
+Hostel Management System`,
     });
 
-  } catch (err) {
-    console.error(err);
+    // Always return response
+    return res.status(200).json("PasswordSent");
+
+  } catch (error) {
+    console.error("Forgot password error:", error);
     return res.status(500).json("ServerError");
   }
 });
@@ -396,4 +405,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`connected to port ${PORT}`);
 });
+
 
